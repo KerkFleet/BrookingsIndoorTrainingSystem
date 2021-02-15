@@ -15,14 +15,14 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Choose your desired space below:";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Your contact page.";
+            ViewBag.Message = "Equipment Manager";
 
             return View();
         }
