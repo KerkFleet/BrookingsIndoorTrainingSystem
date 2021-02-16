@@ -15,16 +15,34 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Choose your desired space below:";
+            ViewBag.Message = "This is the about page";
 
             return View();
         }
 
         public ActionResult Contact()
         {
-            ViewBag.Message = "Equipment Manager";
+            ViewBag.Message = "This is the contact page";
 
             return View();
         }
+
+        // ++++ Welcome Page Views - John Kirkvold ++++
+        public ActionResult EquipmentView()
+        {
+            return View("EquipmentView");
+        }
+
+        public ActionResult SpaceView()
+        {
+            return View("SpaceView");
+        }
+
+        public ActionResult ConcessionsView()
+        {
+            return View("ConcessionsView");
+        }
+        // ++++ Welcome Page Views - John Kirkvold ++++
+
     }
 }

@@ -2,31 +2,95 @@
     ViewBag.Title = "Home Page";
 }
 
-    <div class="jumbotron">
-        <h1>Brookings Indoor Training Site</h1>
-        <p class="lead">Options:</p>
-        <p><a href="https://localhost:44352/Home/About" class="btn btn-primary btn-lg">Space Scheduling &raquo;</a></p>
-        <p><a href="https://asp.net" class="btn btn-primary btn-lg">Equipment Manager &raquo;</a></p>
+@* Title*@
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>@Html.Label("Welcome to the", new { style = "font-size:40px; color:##36e800" })</h5>
+                    <h5>@Html.Label("Brookings Indoor Training System", new { style = "font-size:40px; color:#36e800" })</h5>
+                </div>
+            </div>
+        </center>
     </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Hi this is John from my Mac</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+    <hr />
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <font size="4" face="helvetica" color="black">
+                        <div>Select the Module you would like to go to</div>
+                    </font>
+                </div>
+            </div>
+        </center>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+}
+
+@* +++ Buttons +++ *@
+@using (Html.BeginForm("EquipmentView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Equipment Manager" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
     </div>
-    <div class="col-md-4">
-        <h2>I hear you loud and clear</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+}
+
+@using (Html.BeginForm("SpaceView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Space Scheduler" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
     </div>
-</div>
+}
+
+@using (Html.BeginForm("ConcessionsView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Concessions Manager" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Funds Manager" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@* +++ Buttons +++ *@

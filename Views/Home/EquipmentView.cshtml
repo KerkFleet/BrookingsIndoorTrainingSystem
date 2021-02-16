@@ -1,0 +1,32 @@
+﻿@{ ViewBag.Title = "Equipment Page"; }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>@Html.Label("Equipment Manager", new { style = "font-size:40px; color:##36e800" })</h5>
+                </div>
+            </div>
+        </center>
+    </div>
+
+    <hr />
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <font size="4" face="helvetica" color="black">
+                        <div>This is the Equipment Manager Page</div>
+                    </font>
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+
