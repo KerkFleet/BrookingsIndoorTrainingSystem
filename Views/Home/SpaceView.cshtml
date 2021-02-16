@@ -28,3 +28,18 @@
         </center>
     </div>
 }
+
+@using (Html.BeginForm("SpaceSoccerView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Soccer Field" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}

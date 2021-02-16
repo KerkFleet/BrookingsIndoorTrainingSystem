@@ -44,5 +44,14 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         }
         // ++++ Welcome Page Views - John Kirkvold ++++
 
+        // Added space soccer view - Nate O'Meara
+        public ActionResult SpaceSoccerView()
+        {
+            return View("SpaceSoccerView");
+        }
+        // --- Nate OMeara
+
+
+
     }
 }
