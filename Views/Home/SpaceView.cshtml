@@ -43,3 +43,33 @@
         </center>
     </div>
 }
+
+@using (Html.BeginForm("SpaceTrackView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Track" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+@using (Html.BeginForm("SpaceBCView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Batting Cage" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}

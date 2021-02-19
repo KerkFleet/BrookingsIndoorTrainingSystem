@@ -29,4 +29,64 @@
     </div>
 }
 
+@using (Html.BeginForm("MoveEquipment", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Move Equipment" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+@* +++ Buttons +++ *@
+
+@using (Html.BeginForm("RentEquipment", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Rent Equipment" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+@using (Html.BeginForm("AddEquipment", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Add Equipment" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+@using (Html.BeginForm("RemoveEquipment", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Remove Equipment" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}

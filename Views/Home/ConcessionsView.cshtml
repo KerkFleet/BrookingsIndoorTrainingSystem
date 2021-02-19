@@ -28,4 +28,32 @@
         </center>
     </div>
 }
+@* +++ Buttons +++ *@
+@using (Html.BeginForm("AddItem", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
 
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="Add Item" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@using (Html.BeginForm("StorageView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <input type="submit" value="View Storage" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
