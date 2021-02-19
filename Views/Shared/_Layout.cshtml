@@ -34,7 +34,19 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - Onyx Application</p>
+            <style>
+                .footer {
+                    left: 0;
+                    bottom: auto;
+                    width: 100%;
+                    background-color: dimgray;
+                    color: white;
+                    text-align: left;
+                }
+            </style>
+            <div class="footer"> 
+                <p>&copy; @DateTime.Now.Year - Onyx Application</p>
+            </div> 
         </footer>
     </div>
 
