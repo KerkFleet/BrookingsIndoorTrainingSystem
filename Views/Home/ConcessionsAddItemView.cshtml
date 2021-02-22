@@ -12,6 +12,25 @@
             <div class="form-group">
                 <div class="col-md-10">
                     <h5>@Html.Label("Concessions Add Item", new { style = "font-size:40px; color:##36e800" })</h5>
+                    @*@/* green bar - Shelby */*@
+                    <html>
+
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                    <body>
+                        <div class="w3-container">
+
+
+                            <div class="w3-bar w3-border w3-green">
+                                <div class="w3-bar-item"></div>
+
+                            </div>
+
+                        </div>
+                    </body>
+                </html>
+                @*@/* end green bar - Shelby */*@
+
                 </div>
             </div>
         </center>
@@ -24,7 +43,52 @@
             <div class="form-group">
                 <div class="col-md-10">
                     <font size="4" face="helvetica" color="black">
-                        <div>This is the Concessions add new items page</div>
+                        <div>Enter how many of the specified item you have added:</div>
+                        <html>
+                        <body>
+
+
+                            @*input boxes to update items - shelby*@
+                            <form action="/action_page.php">
+                                <label for="quantity">Sodas:  </label>
+                                <input type="number" id="quantity" name="quantity" min="1" max="100">
+                                <input type="submit">
+                                <label>   Current Total: 55</label>
+                            </form>
+
+                        </body>
+                    </html>
+
+                    <html>
+                    <body>
+
+
+
+                        <form action="/action_page.php">
+                            <label for="quantity">Pretzels: </label>
+                            <input type="number" id="quantity" name="quantity" min="1" max="100">
+                            <input type="submit">
+                            <label>  Current Total: 15</label>
+                        </form>
+
+                    </body>
+                    </html>
+
+                    <html>
+                    <body>
+
+
+
+                        <form action="/action_page.php">
+                            <label for="quantity">Sodas:  </label>
+                            <input type="number" id="quantity" name="quantity" min="1" max="100">
+                            <input type="submit">
+                            <label>   Current Total: 40</label>
+                        </form>
+                        @*end input boxes to update items - shelby*@
+                    </body>
+                    </html>
+
                     </font>
                 </div>
             </div>
