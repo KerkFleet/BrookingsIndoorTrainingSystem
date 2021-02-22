@@ -166,6 +166,9 @@
     <Content Include="Views\Home\SpaceView.cshtml" />
     <Content Include="Views\Home\ConcessionsView.cshtml" />
     <Content Include="Views\Home\SpaceSoccerView.cshtml" />
+    <Content Include="Views\Home\SpaceBattingView.cshtml" />
+    <Content Include="Views\Home\SpaceTrackView.cshtml" />
+    <Content Include="Views\Home\ConcessionsAddItemView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -49,6 +49,24 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         {
             return View("SpaceSoccerView");
         }
+
+        // Go to Track page
+        public ActionResult SpaceTrackView()
+        {
+            return View("SpaceTrackView");
+        }
+
+        // Go to Batting Cage page
+        public ActionResult SpaceBattingView()
+        {
+            return View("SpaceBattingView");
+        }
+
+        // Go to Concessions Add item page
+        public ActionResult ConcessionsAddItemView()
+        {
+            return View("ConcessionsAddItemView");
+        }
         // --- Nate OMeara
 
 
