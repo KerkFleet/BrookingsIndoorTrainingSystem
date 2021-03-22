@@ -69,7 +69,12 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         }
         // --- Nate OMeara
 
-
-
+        // ++ Added John Kirkvold
+        // Go to Storage item page
+        public ActionResult StorageView()
+        {
+            return View("StorageView");
+        }
+        // ++ Added John Kirkvold
     }
 }

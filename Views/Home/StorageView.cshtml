@@ -1,0 +1,125 @@
+﻿@*@/* green button - Shelby */*@
+<html>
+<head>
+    <style>
+        .button {
+            background-color: #4CAF50; /* Green */
+            border: solid;
+            border-color: black;
+            border-width: thin;
+            color: white;
+            padding: 20px 22px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>
+@*@/* end green button - Shelby */*@
+
+
+@{ ViewBag.Title = "Storage Page"; }
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <h5>@Html.Label("Storage Item Manager", new { style = "font-size:40px; color:##36e800" })</h5>
+
+                    @*@/* green bar - Shelby */*@
+                    <html>
+
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                    <body>
+                        <div class="w3-container">
+
+
+                            <div class="w3-bar w3-border w3-green">
+                                <div class="w3-bar-item"></div>
+
+                            </div>
+
+                        </div>
+                    </body>
+                </html>
+                @*@/* end green bar - Shelby */*@
+
+            </div>
+        </div>
+    </center>
+</div>
+
+<hr />
+
+<div class="form-horizontal">
+    <center>
+        <div class="form-group">
+            <div>
+                <font size="4" face="helvetica" color="black">
+                    <div>This is the Storage Manager Page</div>
+                </font>
+            </div>
+        </div>
+    </center>
+</div>
+}
+
+@using (Html.BeginForm("UpdateItemLoc", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Update Item Location" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+@* +++ Buttons +++ *@
+
+@using (Html.BeginForm("AddToItem", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div>
+                <div>
+                    <input type="submit" value="Add to Item" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+
+@using (Html.BeginForm("RemoveFromItem", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Remove From Item" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
