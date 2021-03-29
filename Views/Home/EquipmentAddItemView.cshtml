@@ -1,0 +1,129 @@
+﻿@* Added by Nate O'Meara *@
+@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+@model BrookingsIndoorTrainingSystem.Models.ConcessionsModel
+@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+
+@{ ViewBag.Title = "Equipment add items"; }
+
+@using (Html.BeginForm("ConcessionsAddSoda", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>@Html.Label("Equipment - Add Item", new { style = "font-size:40px; color:##36e800" })</h5>
+                    @*@/* green bar - Shelby */*@
+                    <html>
+
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                    <body>
+                        <div class="w3-container">
+
+
+                            <div class="w3-bar w3-border w3-green">
+                                <div class="w3-bar-item"></div>
+
+                            </div>
+
+                        </div>
+                    </body>
+                </html>
+                @*@/* end green bar - Shelby */*@
+
+            </div>
+        </div>
+    </center>
+</div>
+
+<hr />
+
+<div class="form-horizontal">
+    <center>
+        <div class="form-group">
+            <div class="col-md-10">
+                <font size="4" face="helvetica" color="black">
+                    <div>Enter how many of the specified item you have added:</div>
+                    <html>
+                    <body>
+
+
+                        @*input boxes to update items - shelby*@
+
+                        <div class="form-horizontal">
+
+
+                            <div class="form-group">
+                                <h3>Soda</h3>
+                                <div class="col-md-10">
+
+                                    @Html.EditorFor(model => model.itemAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.itemAmount, "", new { @class = "text-danger" })
+
+                                </div>
+                                <input type="submit" value="Submit" class="btn btn-default" />
+                            </div>
+
+
+                        </div>
+                        @*end input boxes to update items - shelby*@
+                    </body>
+                </html>
+
+            </font>
+        </div>
+    </div>
+</center>
+</div>
+}
+@*+++++++++++ NEW ITEM BUTTON ++++++++++++++++++++++*@
+@using (Html.BeginForm("ConcessionsAddItem", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Add New Item" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+    @*+++++++++++ NEW ITEM BUTTON ++++++++++++++++++++++*@
+
+
+
+    @* +++++++++++++++++++++++ WORKING SUBMIT BOX FOR ADD ITEM - John +++++++++++++++++++++++ *@
+    @using (Html.BeginForm("ConcessionsAddItem", "Home", FormMethod.Post))
+    {
+        @* This video explains how to conect view data(HTML) to controller(C#) https://www.youtube.com/watch?v=d-p8h5rKnc0 *@
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.itemAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.itemAmount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.itemAmount, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Submit" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+
+
+    }
+    @* +++++++++++++++++++++++ WORKING SUBMIT BOX FOR ADD ITEM - John +++++++++++++++++++++++ *@
+
+
