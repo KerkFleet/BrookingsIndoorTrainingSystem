@@ -170,6 +170,7 @@
     <Content Include="Views\Home\SpaceBattingView.cshtml" />
     <Content Include="Views\Home\SpaceTrackView.cshtml" />
     <Content Include="Views\Home\ConcessionsAddItemView.cshtml" />
+    <Content Include="Views\Home\StorageView.cshtml" />
     <Content Include="Views\ConcessionsTempView.cshtml" />
   </ItemGroup>
   <ItemGroup>

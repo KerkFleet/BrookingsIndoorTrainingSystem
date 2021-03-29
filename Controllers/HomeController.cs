@@ -71,6 +71,13 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View("ConcessionsAddItemView");
         }
 
+        // ++ Added John Kirkvold
+        // Go to Storage item page
+        public ActionResult StorageView()
+        {
+            return View("StorageView");
+        }
+        // ++ Added John Kirkvold
         public string ConcessionsAddItem(ConcessionsModel concessionsModel)
         {
             return "Item Added: " + concessionsModel.itemAmount;
