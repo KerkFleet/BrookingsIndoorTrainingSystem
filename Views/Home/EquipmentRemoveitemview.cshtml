@@ -1,0 +1,94 @@
+﻿@model BrookingsIndoorTrainingSystem.Models.ConcessionsModel
+
+
+@{ ViewBag.Title = "Equipment Remove "; }
+
+@using (Html.BeginForm("Equipmentremove", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div class="col-md-10">
+                    <h5>@Html.Label("Equipment - Remove ", new { style = "font-size:40px; color:##36e800" })</h5>
+                    @*@/* green bar - Shelby */*@
+                    <html>
+
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                    <body>
+                        <div class="w3-container">
+
+
+                            <div class="w3-bar w3-border w3-green">
+                                <div class="w3-bar-item"></div>
+
+                            </div>
+
+                        </div>
+                    </body>
+                </html>
+                @*@/* end green bar - Shelby */*@
+
+            </div>
+        </div>
+    </center>
+</div>
+
+<hr />
+
+<div class="form-horizontal">
+    <center>
+        <div class="form-group">
+            <div class="col-md-10">
+                <font size="4" face="helvetica" color="black">
+                    <div>Enter how many of the specified item you have added:</div>
+                    <html>
+                    <body>
+
+
+                        @*input boxes to update items - shelby*@
+
+                        <div class="form-horizontal">
+
+
+                            <div class="form-group">
+                                <h3>Soda</h3>
+                                <div class="col-md-10">
+
+                                    @Html.EditorFor(model => model.itemAmount, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.itemAmount, "", new { @class = "text-danger" })
+
+                                </div>
+                                <input type="submit" value="Submit" class="btn btn-default" />
+                            </div>
+
+
+                        </div>
+                        @*end input boxes to update items - shelby*@
+                    </body>
+                </html>
+
+            </font>
+        </div>
+    </div>
+</center>
+</div>
+}
+@*+++++++++++ REMOVE ITEM BUTTON ++++++++++++++++++++++*@
+@using (Html.BeginForm("EquipmentRemoveEquipment", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Delete Item" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@*+++++++++++ REMOVE ITEM BUTTON ++++++++++++++++++++++*@
