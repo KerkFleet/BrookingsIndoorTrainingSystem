@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BrookingsIndoorTrainingSystem.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -62,13 +63,19 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View("SpaceBattingView");
         }
 
+
+        // +++++ Concessions Controllers +++++
         // Go to Concessions Add item page
         public ActionResult ConcessionsAddItemView()
         {
             return View("ConcessionsAddItemView");
         }
-        // --- Nate OMeara
 
+        public string ConcessionsAddItem(ConcessionsModel concessionsModel)
+        {
+            return "Item Added: " + concessionsModel.itemAmount;
+        }
+        // +++++ Concessions Controllers +++++
 
 
     }

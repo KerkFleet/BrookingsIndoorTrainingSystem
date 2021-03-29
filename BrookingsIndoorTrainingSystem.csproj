@@ -124,6 +124,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ConcessionsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -169,10 +170,10 @@
     <Content Include="Views\Home\SpaceBattingView.cshtml" />
     <Content Include="Views\Home\SpaceTrackView.cshtml" />
     <Content Include="Views\Home\ConcessionsAddItemView.cshtml" />
+    <Content Include="Views\ConcessionsTempView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
