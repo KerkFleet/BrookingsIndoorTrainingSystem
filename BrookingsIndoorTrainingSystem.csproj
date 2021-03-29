@@ -126,6 +126,8 @@
     </Compile>
     <Compile Include="Models\ConcessionsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Access\DataAcess.cs" />
+    <Compile Include="Services\Data\SecurityDAO.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -172,9 +174,14 @@
     <Content Include="Views\Home\ConcessionsAddItemView.cshtml" />
     <Content Include="Views\Home\StorageView.cshtml" />
     <Content Include="Views\ConcessionsTempView.cshtml" />
+    <Content Include="Views\Home\ConcessionsUpdateLocation.cshtml" />
+    <Content Include="Views\Home\ConcessionsRemoveItemView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Concessions\" />
+    <Folder Include="Views\Equipment\" />
+    <Folder Include="Views\Spaces\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

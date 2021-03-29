@@ -75,51 +75,22 @@
         </div>
     </center>
 </div>
+
+
 }
 
-@using (Html.BeginForm("UpdateItemLoc", "Home", FormMethod.Post))
+@using (Html.BeginForm("ConcessionsUpdateLoc", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <center>
-            <div class="form-group">
-                <div>
-                    <input type="submit" value="Update Item Location" class="button" />
-                </div>
-            </div>
-        </center>
-    </div>
+<form action="/action_page.php">
+    <label for="sodas">Sodas:</label>
+    <select id="sodas" name="sodas">
+        <option value="Front Cooler">Front Cooler</option>
+        <option value="saab">Back Cooler</option>
+    </select>
+    <input type="submit">
+</form>
 }
 
 @* +++ Buttons +++ *@
-
-@using (Html.BeginForm("AddToItem", "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <center>
-            <div>
-                <div>
-                    <input type="submit" value="Add to Item" class="button" />
-                </div>
-            </div>
-        </center>
-    </div>
-}
-
-@using (Html.BeginForm("RemoveFromItem", "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <center>
-            <div class="form-group">
-                <div>
-                    <input type="submit" value="Remove From Item" class="button" />
-                </div>
-            </div>
-        </center>
-    </div>
-}

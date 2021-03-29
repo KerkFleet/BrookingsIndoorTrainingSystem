@@ -1,4 +1,6 @@
 ﻿using BrookingsIndoorTrainingSystem.Models;
+using BrookingsIndoorTrainingSystem.Services.Access;
+using BrookingsIndoorTrainingSystem.Services.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +11,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 {
     public class HomeController : Controller
     {
+        //+++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++++
         public ActionResult Index()
         {
             return View();
@@ -28,22 +31,17 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View();
         }
 
-        // ++++ Welcome Page Views - John Kirkvold ++++
+        //+++++++++++ Equipment Controllers +++++++++++++++++++++++++++++++
         public ActionResult EquipmentView()
         {
             return View("EquipmentView");
         }
 
+        // ++++++ SPACES Controllers  +++++++++++++++++++++++++++++++++++++++++++++++
         public ActionResult SpaceView()
         {
             return View("SpaceView");
         }
-
-        public ActionResult ConcessionsView()
-        {
-            return View("ConcessionsView");
-        }
-        // ++++ Welcome Page Views - John Kirkvold ++++
 
         // Added space soccer view - Nate O'Meara
         public ActionResult SpaceSoccerView()
@@ -64,11 +62,16 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         }
 
 
-        // +++++ Concessions Controllers +++++
-        // Go to Concessions Add item page
-        public ActionResult ConcessionsAddItemView()
+        // +++++ Concessions Controllers +++++++++++++++++++++++++++++++++++++++++++
+        public ActionResult ConcessionsView()
         {
-            return View("ConcessionsAddItemView");
+            return View("ConcessionsView");
+        }
+
+        public ActionResult ConcessionsUpdateLocationView(ConcessionsModel concessionsModel)
+        {
+
+            return View("ConcessionsUpdateLocation");
         }
 
         // ++ Added John Kirkvold
@@ -77,13 +80,53 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         {
             return View("StorageView");
         }
-        // ++ Added John Kirkvold
-        public string ConcessionsAddItem(ConcessionsModel concessionsModel)
+
+
+        // Go to Concessions Add item page
+        public ActionResult ConcessionsAddItemView()
         {
-            return "Item Added: " + concessionsModel.itemAmount;
+            return View("ConcessionsAddItemView");
         }
-        // +++++ Concessions Controllers +++++
+
+        // Go to Concessions remove item page
+        public ActionResult ConcessionsRemoveItemView()
+        {
+            return View("ConcessionsRemoveItemView");
+        }
 
 
+        public string ConcessionsAddSoda(ConcessionsModel concessionsModel)
+        {
+            concessionsModel.itemName = "Sodas";
+            DataAcess dataAccess = new DataAcess();
+            Boolean success = dataAccess.ConcessionsAddItemAmount(concessionsModel);
+            if (success)
+                return "Item added";
+            else
+                return "Please enter an integer value greater than zero.";
+        }
+        public string ConcessionsRemoveSoda(ConcessionsModel concessionsModel)
+        {
+            concessionsModel.itemName = "Sodas";
+            DataAcess dataAccess = new DataAcess();
+            Boolean success = dataAccess.ConcessionsRemoveItemAmount(concessionsModel);
+            if (success)
+                return "Item removed";
+            else
+                return "Please enter an integer value greater than zero, but less or equal to the total amount.";
+        }
+
+
+        public string ConcessionsUpdateItemLoc(ConcessionsModel concessionsModel)
+        {
+
+
+            DataAcess dataAccess = new DataAcess();
+            Boolean success = dataAccess.MoveConcessionItem(concessionsModel);
+            if (success)
+                return "Correct Amount";
+            else
+                return "Incorrect Amount";
+        }
     }
 }
