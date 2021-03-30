@@ -101,31 +101,37 @@ namespace BrookingsIndoorTrainingSystem.Services.Access
 
         public bool MoveConcessionItem(ConcessionsModel item)
         {
-            //temporary only
-            string Location = "Storage";
-            int Amount = 15;
-            //temp ^
+            bool success = true;
 
-            bool passed = true;
-            if(Amount > item.itemAmount)
-            {
-                passed = false;
-            }
-            else
-            {
-                if(Amount == item.itemAmount)
+               string queryString = "UPDATE ConcessionsTable SET Item_Loc = @itemLoc WHERE Item_Name = @itemName";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
-                    item.itemLoc = Location;
+                    //here is where we connect to the database and perform the SQL command
+                    SqlCommand command = new SqlCommand(queryString, connection);
+
+                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                    command.Parameters.Add("@itemName", System.Data.SqlDbType.VarChar, 50).Value = item.itemName;
+                    command.Parameters.Add("@itemLoc", System.Data.SqlDbType.Int).Value = item.itemLoc;
+
+                    //basically a test to make sure it worked, and catch exception
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
                 }
-                else
-                {
-                    ConcessionsModel newItem = new ConcessionsModel();
-                    newItem = item;
-                    newItem.itemAmount = Amount;
-                    item.itemAmount = item.itemAmount - Amount;
-                }
-            }
-            return passed;
+
+                success = true;
+            
+
+            return success;
+
         }
     }
 }

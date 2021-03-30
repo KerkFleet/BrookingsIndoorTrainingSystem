@@ -105,6 +105,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             else
                 return "Please enter an integer value greater than zero.";
         }
+
         public string ConcessionsRemoveSoda(ConcessionsModel concessionsModel)
         {
             concessionsModel.itemName = "Sodas";
@@ -117,16 +118,17 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         }
 
 
-        public string ConcessionsUpdateItemLoc(ConcessionsModel concessionsModel)
+        public ActionResult ConcessionsUpdateItemLoc(ConcessionsModel concessionsModel)
         {
 
 
             DataAcess dataAccess = new DataAcess();
+            concessionsModel.itemName = "Sodas";
             Boolean success = dataAccess.MoveConcessionItem(concessionsModel);
             if (success)
-                return "Correct Amount";
-            else
-                return "Incorrect Amount";
+                return View("ConcessionsView");
+
+            return View("StorageView");
         }
     }
 }

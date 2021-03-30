@@ -24,11 +24,11 @@
 </body>
 </html>
 @*@/* end green button - Shelby */*@
-
+@model BrookingsIndoorTrainingSystem.Models.ConcessionsModel
 
 @{ ViewBag.Title = "Storage Page"; }
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("ConcessionsUpdateItemLoc", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -79,18 +79,23 @@
 
 }
 
-@using (Html.BeginForm("ConcessionsUpdateLoc", "Home", FormMethod.Post))
+@using (Html.BeginForm("ConcessionsUpdateItemLoc", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
+
 <form action="/action_page.php">
-    <label for="sodas">Sodas:</label>
-    <select id="sodas" name="sodas">
+
+    <label for="location">Sodas:</label>
+    <select id="location" name="location">
         <option value="Front Cooler">Front Cooler</option>
         <option value="saab">Back Cooler</option>
     </select>
+    @Html.EditorFor(model => model.itemAmount, new { htmlAttributes = new { @class = "form-control" } })
+    @Html.ValidationMessageFor(model => model.itemLoc, "", new { @class = "text-danger" })
     <input type="submit">
 </form>
+
 }
 
 @* +++ Buttons +++ *@
