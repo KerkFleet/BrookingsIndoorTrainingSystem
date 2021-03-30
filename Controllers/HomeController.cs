@@ -36,6 +36,11 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         {
             return View("EquipmentView");
         }
+        // equipment add item view
+        public ActionResult EquipmentAddItemView()
+        {
+            return View("EquipmentAddItemView");
+        }
 
         // ++++++ SPACES Controllers  +++++++++++++++++++++++++++++++++++++++++++++++
         public ActionResult SpaceView()

@@ -174,7 +174,6 @@
     <Content Include="Views\ConcessionsTempView.cshtml" />
     <Content Include="Views\Home\ConcessionsUpdateLocation.cshtml" />
     <Content Include="Views\Home\ConcessionsRemoveItemView.cshtml" />
-    <Content Include="Views\Home\EquipmentRemoveitemview.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
