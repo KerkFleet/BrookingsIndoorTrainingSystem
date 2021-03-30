@@ -1,94 +1,81 @@
-﻿@model BrookingsIndoorTrainingSystem.Models.ConcessionsModel
+﻿@* Added by Alex Zschoche *@
+@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+@model BrookingsIndoorTrainingSystem.Models.EquipmentModel
+@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+
+@{ ViewBag.Title = "Equipment remove items"; }
 
 
-@{ ViewBag.Title = "Equipment Remove "; }
-
-@using (Html.BeginForm("Equipmentremove", "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <center>
-            <div class="form-group">
-                <div class="col-md-10">
-                    <h5>@Html.Label("Equipment - Remove ", new { style = "font-size:40px; color:##36e800" })</h5>
-                    @*@/* green bar - Shelby */*@
-                    <html>
-
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-                    <body>
-                        <div class="w3-container">
-
-
-                            <div class="w3-bar w3-border w3-green">
-                                <div class="w3-bar-item"></div>
-
-                            </div>
-
-                        </div>
-                    </body>
-                </html>
-                @*@/* end green bar - Shelby */*@
-
-            </div>
-        </div>
-    </center>
-</div>
-
-<hr />
-
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Form</title>
+</head>
 <div class="form-horizontal">
     <center>
         <div class="form-group">
             <div class="col-md-10">
-                <font size="4" face="helvetica" color="black">
-                    <div>Enter how many of the specified item you have added:</div>
-                    <html>
-                    <body>
+                <h5>@Html.Label("Equipment - Remove Item", new { style = "font-size:40px; color:##36e800" })</h5>
+                @*@/* green bar - Shelby */*@
+                <html>
+
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                <body>
+                    <div class="w3-container">
 
 
-                        @*input boxes to update items - shelby*@
+                        <div class="w3-bar w3-border w3-green">
+                            <div class="w3-bar-item"></div>
 
-                        <div class="form-horizontal">
-
-
-                            <div class="form-group">
-                                <h3>Soda</h3>
-                                <div class="col-md-10">
-
-                                    @Html.EditorFor(model => model.itemAmount, new { htmlAttributes = new { @class = "form-control" } })
-                                    @Html.ValidationMessageFor(model => model.itemAmount, "", new { @class = "text-danger" })
-
-                                </div>
-                                <input type="submit" value="Submit" class="btn btn-default" />
-                            </div>
 
 
                         </div>
-                        @*end input boxes to update items - shelby*@
-                    </body>
-                </html>
 
-            </font>
+
+
+                        <div class="form-horizontal">
+                            <form method="post">
+                                <fieldset>
+                                    <select id="Items" name="Items">
+                                        <option value="SoccerBall">Soccer Balls</option>
+                                        <option value="BasketBall">Basket Balls</option>
+                                    </select>
+                                    <label for="quantity">Quantity (between 1 and 5):</label>
+                                    <input type="number" id="quantity" name="quantity" min="1" max="5">
+                                    <input type="submit" />
+                                </fieldset>
+                            </form>
+                        </div>
+
+
+                        @{
+                            if (IsPost)
+                            {
+                                string item = Request.Form["Items"];
+                                int amount = Request.Form["quantity"].AsInt();
+                                <div class="col-md-10">
+                                    <text align="left">
+                                        You removed: <br />
+                                        Item: @item <br />
+                                        Amount: @amount <br />
+                                    </text>
+
+                                </div>
+
+
+
+                            }
+                        }
+
+                    </div>
+                </body>
+            </html>
+            @*@/* end green bar - Shelby */*@
+
         </div>
     </div>
 </center>
 </div>
-}
-@*+++++++++++ REMOVE ITEM BUTTON ++++++++++++++++++++++*@
-@using (Html.BeginForm("EquipmentRemoveEquipment", "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
-        <center>
-            <div class="form-group">
-                <div>
-                    <input type="submit" value="Delete Item" class="button" />
-                </div>
-            </div>
-        </center>
-    </div>
-}
-@*+++++++++++ REMOVE ITEM BUTTON ++++++++++++++++++++++*@
+</html>
