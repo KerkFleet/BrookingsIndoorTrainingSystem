@@ -1,5 +1,4 @@
 ﻿using BrookingsIndoorTrainingSystem.Models;
-using BrookingsIndoorTrainingSystem.Services.Data;
 using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
@@ -12,7 +11,9 @@ namespace BrookingsIndoorTrainingSystem.Services.Access
     {
 
         //this is used to connect to the database
-        public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //Shelby's string
+         public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
 
         //
         public bool ConcessionsAddItemAmount(ConcessionsModel item)
@@ -133,5 +134,6 @@ namespace BrookingsIndoorTrainingSystem.Services.Access
             return success;
 
         }
+
     }
 }

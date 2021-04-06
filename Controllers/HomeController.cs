@@ -1,11 +1,12 @@
 ﻿using BrookingsIndoorTrainingSystem.Models;
 using BrookingsIndoorTrainingSystem.Services.Access;
-using BrookingsIndoorTrainingSystem.Services.Data;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+
 
 namespace BrookingsIndoorTrainingSystem.Controllers
 {
@@ -86,11 +87,6 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         }
 
         // ++ Added John Kirkvold
-        // Go to Storage item page
-        public ActionResult StorageView()
-        {
-            return View("StorageView");
-        }
 
 
         // Go to Concessions Add item page
@@ -137,9 +133,47 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             concessionsModel.itemName = "Sodas";
             Boolean success = dataAccess.MoveConcessionItem(concessionsModel);
             if (success)
-                return View("ConcessionsView");
+                return View("StorageView");
 
-            return View("StorageView");
+            return View("ConcessionsView");
+        }
+
+        // GET: /concessionsTable/ 
+
+        public ActionResult StorageView()
+        {
+
+            //this is used to connect to the database
+            //Shelby's string
+            string connectionString = @"data source=(localdb)\mssqllocaldb;initial catalog=bits database;integrated security=true;connect timeout=30;encrypt=false;trustservercertificate=false;applicationintent=readwrite;multisubnetfailover=false";
+            string sql = "SELECT * FROM ConcessionsTable";
+
+            var model = new List<ConcessionsModel>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+
+      
+
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while(rdr.Read())
+                {
+                    var item = new ConcessionsModel();
+      
+                    item.itemName = (string)rdr["Item_Name"];
+                    item.itemAmount = (int)rdr["Item_Amount"];
+                    item.itemLoc = (string)rdr["Item_Loc"];
+                    model.Add(item);
+
+                }
+            }
+            return View(model);
+            //var entities = new BITS_DatabaseEntities();
+
+            //return View(entities.Concessions.ToList());
         }
     }
 }
