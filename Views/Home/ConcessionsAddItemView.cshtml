@@ -3,17 +3,19 @@
 @model BrookingsIndoorTrainingSystem.Models.ConcessionsModel
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 
-@{ ViewBag.Title = "Concessions Add Soda"; }
 
-@using (Html.BeginForm("ConcessionsAddSoda", "Home", FormMethod.Post))
+@using (Html.BeginForm("ConcessionsAddItem", "Home", new { itemName = ViewBag.itemName }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h3 class="left">
+            Add - @ViewBag.itemName
+        </h3>
         <center>
             <div class="form-group">
                 <div class="col-md-10">
-                    <h5>@Html.Label("Concessions - Add Item", new { style = "font-size:40px; color:##36e800" })</h5>
+
                     @*@/* green bar - Shelby */*@
                     <html>
 
@@ -36,7 +38,7 @@
             </div>
         </div>
     </center>
-</div>
+    </div>
 
 <hr />
 
@@ -51,24 +53,23 @@
 
 
                         @*input boxes to update items - shelby*@
-
                         <div class="form-horizontal">
 
 
                             <div class="form-group">
-                                <h3>Soda</h3>
                                 <div class="col-md-10">
-
                                     @Html.EditorFor(model => model.itemAmount, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.itemAmount, "", new { @class = "text-danger" })
-
-
                                 </div>
-                                <input type="submit" value="Submit" class="btn btn-default" />
                             </div>
 
-
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <input type="submit" value="Submit" class="btn btn-default" />
+                                </div>
+                            </div>
                         </div>
+
                         @*end input boxes to update items - shelby*@
                     </body>
                 </html>
@@ -80,7 +81,7 @@
 </div>
 }
 @*+++++++++++ NEW ITEM BUTTON ++++++++++++++++++++++*@
-@using (Html.BeginForm("ConcessionsAddItem", "Home", FormMethod.Post))
+@*@using (Html.BeginForm("ConcessionsAddItem", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -93,17 +94,17 @@
             </div>
         </center>
     </div>
-}
+}*@
     @*+++++++++++ NEW ITEM BUTTON ++++++++++++++++++++++*@
 
 
 
     @* +++++++++++++++++++++++ WORKING SUBMIT BOX FOR ADD ITEM - John +++++++++++++++++++++++ *@
-    @using (Html.BeginForm("ConcessionsAddItem", "Home", FormMethod.Post))
-    {
+    @*@using (Html.BeginForm("ConcessionsAddItem", "Home", FormMethod.Post))
+    {*@
         @* This video explains how to conect view data(HTML) to controller(C#) https://www.youtube.com/watch?v=d-p8h5rKnc0 *@
 
-        @Html.AntiForgeryToken()
+        @*@Html.AntiForgeryToken()
 
         <div class="form-horizontal">
 
@@ -124,7 +125,7 @@
         </div>
 
 
-    }
+    }*@
     @* +++++++++++++++++++++++ WORKING SUBMIT BOX FOR ADD ITEM - John +++++++++++++++++++++++ *@
 
 

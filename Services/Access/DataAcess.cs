@@ -52,7 +52,6 @@ namespace BrookingsIndoorTrainingSystem.Services.Access
             else
             {
                 success = false;
-        
             }
             return success;
         }

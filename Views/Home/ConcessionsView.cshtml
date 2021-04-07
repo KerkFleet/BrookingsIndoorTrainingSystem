@@ -81,7 +81,7 @@
 
 @* +++ Buttons +++ *@
 
-@using (Html.BeginForm("ConcessionsAddItemView", "Home", FormMethod.Post))
+@using (Html.BeginForm("ConcessionsMakeSale", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -89,7 +89,7 @@
         <center>
             <div class="form-group">
                 <div>
-                    <input type="submit" value="Add Items" class="button" />
+                    <input type="submit" value="Make Sale" class="button" />
                 </div>
             </div>
         </center>
@@ -97,20 +97,6 @@
 }
 
 
-@using (Html.BeginForm("ConcessionsRemoveItemView", "Home", FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <center>
-            <div class="form-group">
-                <div>
-                    <input type="submit" value="Remove Items" class="button" />
-                </div>
-            </div>
-        </center>
-    </div>
-}
 
 @using (Html.BeginForm("StorageView", "Home", FormMethod.Post))
 {

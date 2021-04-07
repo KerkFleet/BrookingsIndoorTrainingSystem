@@ -1,7 +1,10 @@
 ﻿@model List<BrookingsIndoorTrainingSystem.Models.ConcessionsModel>
 
 
-<h1>Student</h1>
+
+@using (Html.BeginForm("ConcessionsEditItemView", "Home", FormMethod.Post))
+{
+    <h1>Concessions Storage</h1>
 
 <table>
     <tr>
@@ -11,13 +14,15 @@
     </tr>
     @foreach (var item in Model)
     {
-<tr>
-    <td>@item.itemName</td>
-    <td>@item.itemAmount</td>
-    <td>@item.itemLoc     <input type="submit" value="Edit" class="btn btn-default" height="10" width="20" /></td>
-    
-</tr>
+        <tr>
+            
+            <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName }, null ) </td>
+            <td>@item.itemAmount</td>
+            <td>@item.itemLoc </td>
+
+        </tr>
     }
 </table>
 
 
+}

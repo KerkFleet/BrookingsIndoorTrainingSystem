@@ -157,6 +157,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Views\Home\StyleSheet.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -184,6 +185,7 @@
     <Content Include="Views\Home\EquipmentAddItemView.cshtml" />
     <Content Include="Views\Home\EquipmentRemoveitemview.cshtml" />
     <Content Include="Views\Home\StorageView.cshtml" />
+    <Content Include="Views\Home\ConcessionsEditItemView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
