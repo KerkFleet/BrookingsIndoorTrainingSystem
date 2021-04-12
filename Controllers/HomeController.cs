@@ -244,57 +244,13 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         public ActionResult ConcessionsMakeSaleView()
         {
-            //GlobalConcessionsMakeSaleCartModel.cart = new List<ConcessionsMakeSaleCartModel>();
-
-            //// ++++++ Grab Concessions Storage Data for Table ++++++++
-            //string sql = "SELECT * FROM ConcessionsTable";
-
-
-            //// Create Objects to Store Conessions SQL data
-            //List<ConcessionsModel> concessionsList = new List<ConcessionsModel>();
-
-            //var model = new ConcessionsMakeSaleModel();
-
-            //using (SqlConnection connection = new SqlConnection(connectionString))
-            //{
-            //    SqlCommand cmd = new SqlCommand(sql, connection);
-
-            //    connection.Open();
-            //    SqlDataReader rdr = cmd.ExecuteReader();
-
-            //    while (rdr.Read())
-            //    {
-
-            //        ConcessionsModel concession = new ConcessionsModel();
-            //        concession.itemName = (string)rdr["Item_Name"];
-            //        concession.itemAmount = (int)rdr["Item_Amount"];
-            //        concession.itemLoc = (string)rdr["Item_Loc"];
-            //        concessionsList.Add(concession);
-            //    }
-            //}
-            //// ++++++ Grab Concessions Storage Data for Table ++++++++
-
-
-            //ConcessionsMakeSaleModel concessionsMakeSale = new ConcessionsMakeSaleModel();
-            //concessionsMakeSale.ConcessionsList = concessionsList;
-            //concessionsMakeSale.ConcessionsCartList = GlobalConcessionsMakeSaleCartModel.cart;
-
-            //model = concessionsMakeSale;
-            //return View(model);
-
-
             string sql = "SELECT * FROM ConcessionsTable";
-
-
 
             var model = new List<ConcessionsModel>();
 
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
-
-
-
 
                 connection.Open();
                 SqlDataReader rdr = cmd.ExecuteReader();
@@ -381,7 +337,15 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         public ActionResult ConcessionsCartRemoveItem(string itemName)
         {
-            ConcessionsCartView();
+            for (int i = 0; i < GlobalConcessionsCartModel.cart.Count; i++)
+            {
+                // if it is List<String>
+                if (GlobalConcessionsCartModel.cart[i].itemName == itemName)
+                {
+                    GlobalConcessionsCartModel.cart.RemoveAt(i);
+                }
+            }
+             ConcessionsCartView();
             return View("ConcessionsCartView");
         }
 

@@ -17,12 +17,12 @@
         </tr>
         @foreach (var item in Model)
         {
-            <tr>
+    <tr>
 
-                <td>@Html.ActionLink(item.itemName, "ConcessionsCartRemoveItem", "Home", new { itemName = item.itemName }, null) &nbsp;</td>
-                <td>@item.itemAmount &nbsp;</td>
-
-            </tr>
+            <td>@item.itemName &nbsp;</td>
+            <td>@item.itemAmount &nbsp;</td>
+            <td>@Html.ActionLink("Remove", "ConcessionsCartRemoveItem", "Home", new { itemName = item.itemName }, null) &nbsp;</td>
+    </tr>
         }
     </table>
 }
