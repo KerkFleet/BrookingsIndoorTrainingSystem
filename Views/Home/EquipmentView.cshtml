@@ -109,7 +109,7 @@
     </div>
 }
 
-@using (Html.BeginForm("EquipmentAddItemView", "Home", FormMethod.Post))
+@using (Html.BeginForm("EquipmentAddItemView", "Home", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 
@@ -124,7 +124,7 @@
     </div>
 }
 
-@using (Html.BeginForm("EquipmentRemoveItemView", "Home", FormMethod.Post))
+@using (Html.BeginForm("EquipmentRemoveItemView", "Home", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 
