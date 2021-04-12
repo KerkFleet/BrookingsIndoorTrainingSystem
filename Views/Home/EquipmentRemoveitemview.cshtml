@@ -5,7 +5,7 @@
 
 @{ ViewBag.Title = "Equipment remove items"; }
 @using System.Data.SqlClient;
-
+@using System.Web;
 
 <!DOCTYPE html>
 <html>
@@ -33,8 +33,8 @@
 
                         </div>
 
-                        @{ 
-                            string item = Request.Form["item"];
+                        @{
+                            string item = Request.Form["Items"];
                             int amount = Request.Form["quantity"].AsInt();
                             string Location = Request.Form["Location"];
 
@@ -48,46 +48,106 @@
                             using (SqlConnection connection = new SqlConnection(connectionString))
                             {
                                 //here is where we connect to the database and perform the SQL command
-                                SqlCommand command = new SqlCommand(queryString, connection);
+                               // SqlCommand command = new SqlCommand(queryString, connection);
 
                                 //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
-                                command.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
-                                command.Parameters.Add("@Location", System.Data.SqlDbType.VarChar, 50).Value = Location;
-                                command.Parameters.Add("@Amount", System.Data.SqlDbType.Int).Value = amount;
+                               // command.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
+                                // command.Parameters.Add("@Location", System.Data.SqlDbType.VarChar, 50).Value = Location;
+                                // command.Parameters.Add("@Amount", System.Data.SqlDbType.Int).Value = amount;
 
 
-                                command.Connection.Open();
-                                command.ExecuteNonQuery();
+                                //command.Connection.Open();
+                                //command.ExecuteNonQuery();
+
+
+                                string selectQuery = "Select [Name] from Equipment";
+                                SqlCommand command2 = new SqlCommand(selectQuery, connection);
+                                //command2.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
+                                command2.Connection.Open();
+
+                                SqlDataReader reader = command2.ExecuteReader();
+
+                                if (reader.HasRows)
+                                {
+                                    <div class="form-horizontal">
+                                        <form method="post">
+                                            <fieldset>
+                                                <label for="Items">Select an item from the dropdown and press submit to remove it.</label>
+                                                <select id="Items" name="Items">
+                                                    @while (reader.Read())
+                                                    {
+                                                        <option value="@reader.GetString(0)">@reader.GetString(0)</option>
+                                                    }
+                                                </select>
+                                            
+                                                <input type="submit" name="removeButton" />
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    @*while (reader.Read())
+                                    {
+                                        <div>
+                                            <p>@reader.GetString(0)</p>
+
+                                        </div>
+                                        // Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
+                                        // reader.GetString(1));
+                                    }*@
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No rows found.");
+                                }
+                                reader.Close();
+
+                                @*<div>
+                                    <p>@command2.ExecuteReader()</p>
+
+                                </div>*@
                             }
 
+
+
+                            @*<div class="form-horizontal">
+                                <form method="post">
+                                    <fieldset>
+
+                                        <select id="Items" name="Items">
+                                            <option value="SoccerBall">Soccer Balls</option>
+                                            <option value="BasketBall">Basket Balls</option>
+                                        </select>
+                                        <label for="quantity">Quantity (between 1 and 5):</label>
+                                        <input type="number" id="quantity" name="quantity" min="1" max="5">
+                                        <input type="submit" name="removeButton" value="1" />
+                                    </fieldset>
+                                </form>
+                            </div>*@
                         }
-
-                        <div class="form-horizontal">
-                            <form method="post">
-                                <fieldset>
-                                    @foreach
-                                    <select id="Items" name="Items">
-                                        <option value="SoccerBall">Soccer Balls</option>
-                                        <option value="BasketBall">Basket Balls</option>
-                                    </select>
-                                    <label for="quantity">Quantity (between 1 and 5):</label>
-                                    <input type="number" id="quantity" name="quantity" min="1" max="5">
-                                    <input type="submit" />
-                                </fieldset>
-                            </form>
-                        </div>
-
 
                         @{
                             if (IsPost)
                             {
-                                string item = Request.Form["Items"];
-                                int amount = Request.Form["quantity"].AsInt();
+                                using (SqlConnection connection = new SqlConnection(connectionString))
+                                {
+                                    //here is where we connect to the database and perform the SQL comman
+                                    SqlCommand command = new SqlCommand(queryString, connection);
+
+                                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                                    command.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
+
+
+                                    command.Connection.Open();
+                                    command.ExecuteNonQuery();
+                                    
+                                }
+                                // string item = Request.Form["Items"];
+                                //int amount = Request.Form["quantity"].AsInt();
                                 <div class="col-md-10">
                                     <text align="left">
                                         You removed: <br />
                                         Item: @item <br />
                                         Amount: @amount <br />
+
                                     </text>
 
                                 </div>
