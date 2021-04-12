@@ -14,10 +14,18 @@ namespace BrookingsIndoorTrainingSystem.Controllers
     public class HomeController : Controller
     {
         //Shelby's string
-        public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-        //+++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++++
+        //public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        //John's string
+        public string connectionString = @"Data Source = (localdb)\MSSQLLocalDB;Initial Catalog = master; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+
+        // +++++++++++++++++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++
         public ActionResult Index()
         {
+            // *** Create Shopping cart - John Kirkvold *** 
+            GlobalConcessionsCartModel.cart = new List<ConcessionsModel>();
+            // *** Create Shopping cart - John Kirkvold ***
+
             return View();
         }
 
@@ -34,8 +42,9 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
             return View();
         }
+        // +++++++++++++++++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++
 
-        //+++++++++++ Equipment Controllers +++++++++++++++++++++++++++++++
+        // +++++++++++++++++++++++++++++++ Equipment Controllers +++++++++++++++++++++++++++++++
         public ActionResult EquipmentView()
         {
             return View("EquipmentView");
@@ -51,8 +60,9 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         {
             return View("EquipmentRemoveItemView");
         }
+        // +++++++++++++++++++++++++++++++ Equipment Controllers +++++++++++++++++++++++++++++++
 
-        // ++++++ SPACES Controllers  +++++++++++++++++++++++++++++++++++++++++++++++
+        // +++++++++++++++++++++++++++++++ SPACES Controllers  +++++++++++++++++++++++++++++++
         public ActionResult SpaceView()
         {
             return View("SpaceView");
@@ -75,9 +85,9 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         {
             return View("SpaceBattingView");
         }
+        // +++++++++++++++++++++++++++++++ SPACES Controllers  +++++++++++++++++++++++++++++++
 
-
-        // +++++ Concessions Controllers +++++++++++++++++++++++++++++++++++++++++++
+        // +++++++++++++++++++++++++++++++ Concessions Controllers +++++++++++++++++++++++++++++++
         public ActionResult ConcessionsView()
         {
             return View("ConcessionsView");
@@ -186,10 +196,9 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         public ActionResult StorageView()
         {
 
-            //this is used to connect to the database
-            //Shelby's string
-            string connectionString = @"data source=(localdb)\mssqllocaldb;initial catalog=bits database;integrated security=true;connect timeout=30;encrypt=false;trustservercertificate=false;applicationintent=readwrite;multisubnetfailover=false";
-            string sql = "SELECT * FROM ConcessionsTable";
+        string sql = "SELECT * FROM ConcessionsTable";
+
+
 
             var model = new List<ConcessionsModel>();
 
@@ -222,5 +231,150 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
             return View();
         }
+
+        public ActionResult ConcessionsMakeSaleView()
+        {
+            //GlobalConcessionsMakeSaleCartModel.cart = new List<ConcessionsMakeSaleCartModel>();
+
+            //// ++++++ Grab Concessions Storage Data for Table ++++++++
+            //string sql = "SELECT * FROM ConcessionsTable";
+
+
+            //// Create Objects to Store Conessions SQL data
+            //List<ConcessionsModel> concessionsList = new List<ConcessionsModel>();
+
+            //var model = new ConcessionsMakeSaleModel();
+
+            //using (SqlConnection connection = new SqlConnection(connectionString))
+            //{
+            //    SqlCommand cmd = new SqlCommand(sql, connection);
+
+            //    connection.Open();
+            //    SqlDataReader rdr = cmd.ExecuteReader();
+
+            //    while (rdr.Read())
+            //    {
+
+            //        ConcessionsModel concession = new ConcessionsModel();
+            //        concession.itemName = (string)rdr["Item_Name"];
+            //        concession.itemAmount = (int)rdr["Item_Amount"];
+            //        concession.itemLoc = (string)rdr["Item_Loc"];
+            //        concessionsList.Add(concession);
+            //    }
+            //}
+            //// ++++++ Grab Concessions Storage Data for Table ++++++++
+
+
+            //ConcessionsMakeSaleModel concessionsMakeSale = new ConcessionsMakeSaleModel();
+            //concessionsMakeSale.ConcessionsList = concessionsList;
+            //concessionsMakeSale.ConcessionsCartList = GlobalConcessionsMakeSaleCartModel.cart;
+
+            //model = concessionsMakeSale;
+            //return View(model);
+
+
+            string sql = "SELECT * FROM ConcessionsTable";
+
+
+
+            var model = new List<ConcessionsModel>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+
+
+
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var item = new ConcessionsModel();
+
+                    item.itemName = (string)rdr["Item_Name"];
+                    item.itemAmount = (int)rdr["Item_Amount"];
+                    item.itemLoc = (string)rdr["Item_Loc"];
+                    model.Add(item);
+
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult ConcessionsCartView()
+        {
+
+            var model = GlobalConcessionsCartModel.cart;
+
+            return View(model);
+        }
+
+        public ActionResult ConcessionsCartAddItemView(string itemName)
+        {
+            ViewBag.itemName = itemName;
+            return View();
+        }
+
+        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName)
+        {
+            string queryString;
+            bool success = true;
+
+            //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
+            if (item.itemAmount > 0)
+            {
+                queryString = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Item_Name = @itemName";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    //here is where we connect to the database and perform the SQL command
+                    SqlCommand command = new SqlCommand(queryString, connection);
+
+                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                    command.Parameters.Add("@itemName", System.Data.SqlDbType.VarChar, 50).Value = itemName;
+                    command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = item.itemAmount;
+
+                    //basically a test to make sure it worked, and catch exception
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
+
+            if (success == true)
+            {
+                GlobalConcessionsCartModel.cart.Add(item);
+                ConcessionsCartView();
+                return View("ConcessionsCartView");
+            }
+            else
+            {
+                ConcessionsCartAddItemView(itemName);
+                return View("ConcessionsCartAddItemView");
+            }
+
+        }
+
+        public ActionResult ConcessionsCartRemoveItem(string itemName)
+        {
+            ConcessionsCartView();
+            return View("ConcessionsCartView");
+        }
+
+        // +++++++++++++++++++++++++++++++ Concessions Controllers +++++++++++++++++++++++++++++++
     }
 }

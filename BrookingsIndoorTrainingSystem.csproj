@@ -186,6 +186,9 @@
     <Content Include="Views\Home\EquipmentRemoveitemview.cshtml" />
     <Content Include="Views\Home\StorageView.cshtml" />
     <Content Include="Views\Home\ConcessionsEditItemView.cshtml" />
+    <Content Include="Views\Home\ConcessionsMakeSaleView.cshtml" />
+    <Content Include="Views\Home\ConcessionsCartView.cshtml" />
+    <Content Include="Views\Home\ConcessionsCartAddItemView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
