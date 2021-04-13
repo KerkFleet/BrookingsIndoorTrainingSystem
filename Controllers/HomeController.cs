@@ -402,7 +402,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                 while (rdr.Read())
                 {
                     var item = new ConcessionsModel();
-
+                    item.id = (int)rdr["Id"];
                     item.itemName = (string)rdr["Item_Name"];
                     item.itemAmount = (int)rdr["Item_Amount"];
                     item.itemLoc = (string)rdr["Item_Loc"];
@@ -421,13 +421,14 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View(model);
         }
 
-        public ActionResult ConcessionsCartAddItemView(string itemName)
+        public ActionResult ConcessionsCartAddItemView(string itemName, int id)
         {
             ViewBag.itemName = itemName;
+            ViewBag.id = id;
             return View();
         }
 
-        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName)
+        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName, int id)
         {
             string queryString;
             bool success = true;
@@ -435,7 +436,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
             if (item.itemAmount > 0)
             {
-                queryString = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Item_Name = @itemName";
+                queryString = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Id = @id";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -443,7 +444,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     SqlCommand command = new SqlCommand(queryString, connection);
 
                     //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
-                    command.Parameters.Add("@itemName", System.Data.SqlDbType.VarChar, 50).Value = itemName;
+                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
                     command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = item.itemAmount;
 
                     //basically a test to make sure it worked, and catch exception
@@ -474,20 +475,25 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             }
             else
             {
-                ConcessionsCartAddItemView(itemName);
+                ConcessionsCartAddItemView(itemName, id);
                 return View("ConcessionsCartAddItemView");
             }
 
         }
 
-        public ActionResult ConcessionsCartRemoveItem(string itemName)
+        public ActionResult ConcessionsCartRemoveItem(string itemName, int id)
         {
             for (int i = 0; i < GlobalConcessionsCartModel.cart.Count; i++)
             {
                 // if it is List<String>
-                if (GlobalConcessionsCartModel.cart[i].itemName == itemName)
+                if (GlobalConcessionsCartModel.cart[i].id == id)
                 {
                     GlobalConcessionsCartModel.cart.RemoveAt(i);
+                    //
+
+
+
+
                 }
             }
             ConcessionsCartView();
