@@ -493,6 +493,34 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     GlobalConcessionsCartModel.cart.RemoveAt(i);
                     //
 
+                    string queryString;
+                    bool success = true;
+
+                    //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
+
+                        queryString = "UPDATE ConcessionsTable SET Item_Amount += @itemAmount WHERE Id = @id";
+
+                        using (SqlConnection connection = new SqlConnection(connectionString))
+                        {
+                            //here is where we connect to the database and perform the SQL command
+                            SqlCommand command = new SqlCommand(queryString, connection);
+
+                            //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                            command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                            command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = GlobalConcessionsCartModel.cart[i].itemAmount;
+
+                            //basically a test to make sure it worked, and catch exception
+                            try
+                            {
+                                connection.Open();
+                                SqlDataReader reader = command.ExecuteReader();
+
+                            }
+                            catch (Exception e)
+                            {
+                                Console.WriteLine(e.Message);
+                            }
+                        }
 
 
 
@@ -503,6 +531,10 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         }
 
 
-
+        // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
+        public ActionResult FundsView()
+        {
+            return View();
+        }
     }
 }

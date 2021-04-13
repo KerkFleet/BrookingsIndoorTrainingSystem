@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="Models\EquipmentModel.cs" />
     <Compile Include="Models\ConcessionsModel.cs" />
+    <Compile Include="Models\FundsModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\Access\DataAcess.cs" />
   </ItemGroup>
@@ -186,11 +187,12 @@
     <Content Include="Views\Home\EquipmentRemoveitemview.cshtml" />
     <Content Include="Views\Home\StorageView.cshtml" />
     <Content Include="Views\Home\ConcessionsEditItemView.cshtml" />
-	<Content Include="Views\Home\ConcessionsMakeSaleView.cshtml" />
-	<Content Include="Views\Home\ConcessionsCartView.cshtml" />
+    <Content Include="Views\Home\ConcessionsMakeSaleView.cshtml" />
+    <Content Include="Views\Home\ConcessionsCartView.cshtml" />
     <Content Include="Views\Home\ConcessionsCartAddItemView.cshtml" />
     <Content Include="Views\Home\EquipmentRentItemView.cshtml" />
     <Content Include="Views\Home\EquipmentMoveItemView.cshtml" />
+    <Content Include="Views\Home\FundsView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
