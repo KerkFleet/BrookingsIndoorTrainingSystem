@@ -13,11 +13,13 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
     public class HomeController : Controller
     {
+
         //Shelby's string
         public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         //+++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++++
         public ActionResult Index()
         {
+            GlobalConcessionsCartModel.cart = new List<ConcessionsModel>();
             return View();
         }
 
@@ -379,5 +381,120 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             ViewBag.id = id;
             return View();
         }
+
+        public ActionResult ConcessionsMakeSaleView()
+        {
+            string sql = "SELECT * FROM ConcessionsTable";
+
+
+
+            var model = new List<ConcessionsModel>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+
+
+
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var item = new ConcessionsModel();
+
+                    item.itemName = (string)rdr["Item_Name"];
+                    item.itemAmount = (int)rdr["Item_Amount"];
+                    item.itemLoc = (string)rdr["Item_Loc"];
+                    model.Add(item);
+
+                }
+            }
+            return View(model);
+        }
+
+        public ActionResult ConcessionsCartView()
+        {
+
+            var model = GlobalConcessionsCartModel.cart;
+
+            return View(model);
+        }
+
+        public ActionResult ConcessionsCartAddItemView(string itemName)
+        {
+            ViewBag.itemName = itemName;
+            return View();
+        }
+
+        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName)
+        {
+            string queryString;
+            bool success = true;
+
+            //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
+            if (item.itemAmount > 0)
+            {
+                queryString = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Item_Name = @itemName";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    //here is where we connect to the database and perform the SQL command
+                    SqlCommand command = new SqlCommand(queryString, connection);
+
+                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                    command.Parameters.Add("@itemName", System.Data.SqlDbType.VarChar, 50).Value = itemName;
+                    command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = item.itemAmount;
+
+                    //basically a test to make sure it worked, and catch exception
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
+
+            if (success == true)
+            {
+                GlobalConcessionsCartModel.cart.Add(item);
+                ConcessionsCartView();
+                return View("ConcessionsCartView");
+            }
+            else
+            {
+                ConcessionsCartAddItemView(itemName);
+                return View("ConcessionsCartAddItemView");
+            }
+
+        }
+
+        public ActionResult ConcessionsCartRemoveItem(string itemName)
+        {
+            for (int i = 0; i < GlobalConcessionsCartModel.cart.Count; i++)
+            {
+                // if it is List<String>
+                if (GlobalConcessionsCartModel.cart[i].itemName == itemName)
+                {
+                    GlobalConcessionsCartModel.cart.RemoveAt(i);
+                }
+            }
+            ConcessionsCartView();
+            return View("ConcessionsCartView");
+        }
+
+
+
     }
 }
