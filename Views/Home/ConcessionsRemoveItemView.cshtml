@@ -3,15 +3,18 @@
 
 @{ ViewBag.Title = "Concessions Remove Soda"; }
 
-@using (Html.BeginForm("ConcessionsRemoveSoda", "Home", FormMethod.Post))
+@using (Html.BeginForm("ConcessionsRemoveItem", "Home", new { itemName = ViewBag.itemName }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
+        <h3 class="left">
+            Remove - @ViewBag.itemName
+        </h3>
         <center>
             <div class="form-group">
                 <div class="col-md-10">
-                    <h5>@Html.Label("Concessions - Remove Items", new { style = "font-size:40px; color:##36e800" })</h5>
+
                     @*@/* green bar - Shelby */*@
                     <html>
 
@@ -34,7 +37,7 @@
             </div>
         </div>
     </center>
-</div>
+    </div>
 
 <hr />
 
@@ -49,22 +52,21 @@
 
 
                         @*input boxes to update items - shelby*@
-
                         <div class="form-horizontal">
 
 
                             <div class="form-group">
-                                <h3>Soda</h3>
                                 <div class="col-md-10">
-
                                     @Html.EditorFor(model => model.itemAmount, new { htmlAttributes = new { @class = "form-control" } })
                                     @Html.ValidationMessageFor(model => model.itemAmount, "", new { @class = "text-danger" })
-
                                 </div>
-                                <input type="submit" value="Submit" class="btn btn-default" />
                             </div>
 
-
+                            <div class="form-group">
+                                <div class="col-md-8">
+                                    <input type="submit" value="Submit" class="btn btn-default" />
+                                </div>
+                            </div>
                         </div>
                         @*end input boxes to update items - shelby*@
                     </body>
@@ -77,8 +79,8 @@
 </div>
 }
 @*+++++++++++ REMOVE ITEM BUTTON ++++++++++++++++++++++*@
-@using (Html.BeginForm("ConcessionsRemoveItemAmount", "Home", FormMethod.Post))
-{
+@*@using (Html.BeginForm("ConcessionsRemoveItemAmount", "Home", FormMethod.Post))*@
+@*{
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
@@ -90,5 +92,5 @@
             </div>
         </center>
     </div>
-}
+}*@
 @*+++++++++++ REMOVE ITEM BUTTON ++++++++++++++++++++++*@

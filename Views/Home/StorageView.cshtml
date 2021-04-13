@@ -5,7 +5,24 @@
 @using (Html.BeginForm("ConcessionsEditItemView", "Home", FormMethod.Post))
 {
     <h1>Concessions Storage</h1>
+    @*@/* green bar - Shelby */*@
+    <html>
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <body>
+        <div class="w3-container">
+
+
+            <div class="w3-bar w3-border w3-green">
+                <div class="w3-bar-item"></div>
+
+            </div>
+
+        </div>
+    </body>
+</html>
+@*@/* end green bar - Shelby */*@
 <table>
     <tr>
         <th>Item</th>
@@ -15,8 +32,8 @@
     @foreach (var item in Model)
     {
         <tr>
-            
-            <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName }, null ) </td>
+
+            <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName, id = item.id }, null) </td>
             <td>@item.itemAmount</td>
             <td>@item.itemLoc </td>
 

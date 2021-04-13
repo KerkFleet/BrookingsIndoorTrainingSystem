@@ -93,6 +93,124 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
 
         // Go to Concessions Add item page
+        public ActionResult ConcessionsUpdateLocation(string itemName, int id)
+        {
+            ViewBag.itemName = itemName;
+            ViewBag.id = id;
+            return View();
+        }
+
+        public ActionResult ConcessionsMoveItem(ConcessionsModel item, string itemName, int id)
+        {
+            int current_amount;
+            string queryString;
+            bool success = true;
+
+                queryString = "SELECT * FROM ConcessionsTable WHERE Id = @id";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    //here is where we connect to the database and perform the SQL command
+                    SqlCommand command = new SqlCommand(queryString, connection);
+
+                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                    command.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = id;
+                    
+                    //basically a test to make sure it worked, and catch exception
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();      
+                        reader.Read();
+                        current_amount = (int)reader["Item_Amount"];
+                        connection.Close();
+                        connection.Open();
+                        command.CommandText = "SELECT * FROM ConcessionsTable WHERE Item_Name = @itemName1";
+                        command.Parameters.Add("@itemName1", System.Data.SqlDbType.VarChar, 50).Value = itemName;
+
+                   
+                    string location;
+                    bool exists;
+                    exists = false;
+                    int existingID = 0;
+                    reader = command.ExecuteReader();
+                    while(reader.Read())
+                    {
+                        location = (string)reader["Item_Loc"];
+                        if (location == item.itemLoc)
+                        {
+                            exists = true;
+                            existingID = (int)reader["Id"];
+                            break;
+                        }
+                           
+                    }
+                    connection.Close();
+                    connection.Open();
+                    if(exists)
+                    {
+                        if (item.itemAmount == current_amount)
+                        {
+
+                            // Change the SQL Command and execute
+                            command.CommandText = "DELETE FROM ConcessionsTable WHERE Id = @id2;";                         
+                            command.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
+                            command.CommandText = "UPDATE ConcessionsTable SET Item_Amount += @itemAmount WHERE Id = @existingID";
+                            command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = item.itemAmount;
+                            command.Parameters.Add("@existingID", System.Data.SqlDbType.Int).Value = existingID;
+
+                            command.ExecuteNonQuery();
+                        }
+                        else if (item.itemAmount < current_amount && item.itemAmount > 0)
+                        {
+                            command.CommandText = "UPDATE ConcessionsTable SET Item_Amount += @itemAmount WHERE Id = @existingID";
+                            command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = item.itemAmount;
+                            command.Parameters.Add("@existingID", System.Data.SqlDbType.Int).Value = existingID;
+                            command.ExecuteNonQuery();
+                            command.CommandText = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount2 WHERE Id = @id2";
+                            command.Parameters.Add("@itemAmount2", System.Data.SqlDbType.Int).Value = item.itemAmount;
+                            command.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                    else
+                    {
+                        if (item.itemAmount == current_amount)
+                        {
+
+                            // Change the SQL Command and execute
+                            command.CommandText = "UPDATE ConcessionsTable SET Item_Loc = @itemLoc WHERE Id = @id2";
+                            command.Parameters.Add("@itemLoc", System.Data.SqlDbType.VarChar, 50).Value = item.itemLoc;
+                            command.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
+                        }
+                        else if (item.itemAmount < current_amount && item.itemAmount > 0)
+                        {
+                            command.CommandText = "INSERT INTO ConcessionsTable values(@iN, @iA, @iL)";
+                            command.Parameters.Add("@iN", System.Data.SqlDbType.VarChar, 50).Value = itemName;
+                            command.Parameters.Add("@iA", System.Data.SqlDbType.Int).Value = item.itemAmount;
+                            command.Parameters.Add("@iL", System.Data.SqlDbType.VarChar, 50).Value = item.itemLoc;
+                            command.ExecuteNonQuery();
+                            command.CommandText = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Id = @id2";
+                            command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = item.itemAmount;
+                            command.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = id;
+                            command.ExecuteNonQuery();
+                        }
+                    }
+
+    
+                }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+                
+
+            return View("ConcessionsView");
+        }
+
         public ActionResult ConcessionsAddItemView(string itemName)
         {
             ViewBag.itemName = itemName;
@@ -100,8 +218,9 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         }
 
         // Go to Concessions remove item page
-        public ActionResult ConcessionsRemoveItemView()
+        public ActionResult ConcessionsRemoveItemView(string itemName)
         {
+            ViewBag.itemName = itemName;
             return View("ConcessionsRemoveItemView");
         }
 
@@ -156,15 +275,53 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         }
 
-        public string ConcessionsRemoveSoda(ConcessionsModel concessionsModel)
+        public ActionResult ConcessionsRemoveItem(ConcessionsModel item, string itemName)
         {
-            concessionsModel.itemName = "Sodas";
-            DataAcess dataAccess = new DataAcess();
-            Boolean success = dataAccess.ConcessionsRemoveItemAmount(concessionsModel);
-            if (success)
-                return "Item removed";
+            string queryString2;
+            bool success = true;
+            //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
+            if (item.itemAmount > 0)
+            {
+             
+                queryString2 = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Item_Name = @itemName";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    //here is where we connect to the database and perform the SQL command
+                    SqlCommand command = new SqlCommand(queryString2, connection);
+
+                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                    command.Parameters.Add("@itemName", System.Data.SqlDbType.VarChar, 50).Value = itemName;
+                    command.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = item.itemAmount;
+
+                    //basically a test to make sure it worked, and catch exception
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+
+                success = true;
+            }
             else
-                return "Please enter an integer value greater than zero, but less or equal to the total amount.";
+            {
+                success = false;
+            }
+
+            return View("ConcessionsView");
+            //if (success)
+
+            //    StorageView();
+            //else
+            //{
+            //    ConcessionsAddItemView("itemName");
+            //}
         }
 
 
@@ -188,7 +345,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
             //this is used to connect to the database
             //Shelby's string
-            string connectionString = @"data source=(localdb)\mssqllocaldb;initial catalog=bits database;integrated security=true;connect timeout=30;encrypt=false;trustservercertificate=false;applicationintent=readwrite;multisubnetfailover=false";
+
             string sql = "SELECT * FROM ConcessionsTable";
 
             var model = new List<ConcessionsModel>();
@@ -205,7 +362,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                 while(rdr.Read())
                 {
                     var item = new ConcessionsModel();
-      
+                    item.id = (int)rdr["Id"];
                     item.itemName = (string)rdr["Item_Name"];
                     item.itemAmount = (int)rdr["Item_Amount"];
                     item.itemLoc = (string)rdr["Item_Loc"];
@@ -216,10 +373,10 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View(model);
         }
 
-        public ActionResult ConcessionsEditItemView(string itemName)
+        public ActionResult ConcessionsEditItemView(string itemName, int id)
         {
             ViewBag.itemName = itemName;
-
+            ViewBag.id = id;
             return View();
         }
     }
