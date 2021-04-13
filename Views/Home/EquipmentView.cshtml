@@ -77,7 +77,7 @@
     </div>
 }
 
-@using (Html.BeginForm("MoveEquipment", "Home", FormMethod.Post))
+@using (Html.BeginForm("EquipmentMoveItemView", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -94,7 +94,7 @@
 
 @* +++ Buttons +++ *@
 
-@using (Html.BeginForm("RentEquipment", "Home", FormMethod.Post))
+@using (Html.BeginForm("EquipmentRentItemView", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -109,7 +109,7 @@
     </div>
 }
 
-@using (Html.BeginForm("EquipmentAddItemView", "Home", FormMethod.Post))
+@using (Html.BeginForm("EquipmentAddItemView", "Home", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 
@@ -124,7 +124,7 @@
     </div>
 }
 
-@using (Html.BeginForm("EquipmentRemoveItemView", "Home", FormMethod.Post))
+@using (Html.BeginForm("EquipmentRemoveItemView", "Home", FormMethod.Get))
 {
     @Html.AntiForgeryToken()
 

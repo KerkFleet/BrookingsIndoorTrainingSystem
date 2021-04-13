@@ -1,0 +1,88 @@
+﻿@* Added by Nate O'Meara *@
+@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+@model BrookingsIndoorTrainingSystem.Models.EquipmentModel
+@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+
+@{ ViewBag.Title = "Equipment Move items"; }
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Customer Form</title>
+</head>
+<div class="form-horizontal">
+    <center>
+        <div class="form-group">
+            <div class="col-md-10">
+                <h5>@Html.Label("Equipment - Move Item", new { style = "font-size:40px; color:##36e800" })</h5>
+                @*@/* green bar*/*@
+                <html>
+
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                <body>
+                    <div class="w3-container">
+
+
+                        <div class="w3-bar w3-border w3-green">
+                            <div class="w3-bar-item"></div>
+
+
+
+                        </div>
+
+
+
+                        <div class="form-horizontal">
+                            <form method="post">
+                                <fieldset>
+                                    <select id="Items" name="Items">
+                                        <option value="SoccerBall">Soccer Balls</option>
+                                        <option value="BasketBall">Basket Balls</option>
+                                    </select>
+                                    <select id="Spaces" name="space">
+                                        <option value="Track">Track</option>
+                                        <option value="Batting Cage">Batting Cage</option>
+                                        <option value="Field">Field</option>
+                                        <option value="Storage">Storage</option>
+                                    </select>
+                                    <input type="submit" />
+                                </fieldset>
+                            </form>
+                        </div>
+                       
+
+                        @{
+                            if (IsPost)
+                            {
+                                string item = Request.Form["Items"];
+                                string space = Request.Form["space"];
+                                <div class="col-md-10">
+                                    <text align="left">
+                                        You moved: @item to @space <br />
+                                    </text>
+
+                                </div>
+                                
+                                
+
+                            }
+                        }
+
+                    </div>
+                </body>
+            </html>
+            @*@/* end green bar*/*@
+
+        </div>
+    </div>
+</center>
+</div>
+
+</html>
+
+
+
+
+

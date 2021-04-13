@@ -1,0 +1,60 @@
+﻿@model List<BrookingsIndoorTrainingSystem.Models.ConcessionsModel>
+
+@{
+    ViewBag.Title = "ConcessionsMakeSaleView";
+}
+
+<h1>ConcessionsMakeSaleView</h1>
+
+@* -------------------- Concessions Storage Chart ---------------------- *@
+@using (Html.BeginForm("ConcessionsCartAddItemView", "Home", FormMethod.Post))
+{
+    <h3>Concessions Storage</h3>
+
+    <table>
+        <tr>
+            <th>Item &nbsp;</th>
+            <th>Amount &nbsp;</th>
+            <th>Location &nbsp;</th>
+            <th>Price &nbsp;</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+
+                <td>@Html.ActionLink(item.itemName, "ConcessionsCartAddItemView", "Home", new { itemName = item.itemName }, null) &nbsp;</td>
+                <td>@item.itemAmount &nbsp;</td>
+                <td>@item.itemLoc &nbsp;</td>
+                <td>$@item.itemPrice &nbsp;</td>
+
+            </tr>
+        }
+    </table>
+}
+@* -------------------- Concessions Storage Chart ---------------------- *@
+
+
+@* -------------------- Shopping Cart Button ---------------------- *@
+@using (Html.BeginForm("ConcessionsCartView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="View Cart" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@* -------------------- Shopping Cart ---------------------- *@
+
+
+
+
+
+
+
+

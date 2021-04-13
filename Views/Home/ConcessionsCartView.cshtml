@@ -1,0 +1,65 @@
+﻿@model List<BrookingsIndoorTrainingSystem.Models.ConcessionsModel>
+
+@{
+    ViewBag.Title = "ConcessionsCartView";
+}
+
+<h1>Shopping Cart</h1>
+<h4>Click item to remove it from cart</h4>
+
+@* -------------------- Concessions Storage Chart ---------------------- *@
+@using (Html.BeginForm("ConcessionsCartView", "Home", FormMethod.Post))
+{
+    <table>
+        <tr>
+            <th>Item &nbsp;</th>
+            <th>Amount &nbsp;</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+    <tr>
+
+            <td>@item.itemName &nbsp;</td>
+            <td>@item.itemAmount &nbsp;</td>
+            <td>@Html.ActionLink("Remove", "ConcessionsCartRemoveItem", "Home", new { itemName = item.itemName }, null) &nbsp;</td>
+    </tr>
+        }
+    </table>
+}
+@* -------------------- Concessions Storage Chart ---------------------- *@
+
+@* -------------------- Make Sale Button ---------------------- *@
+@using (Html.BeginForm("ConcessionsMakeSaleView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Continue Shopping" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@* -------------------- Make Sale Button ---------------------- *@
+
+<hr />
+
+@* -------------------- Checkout Button ---------------------- *@
+@using (Html.BeginForm("ConcessionsCheckoutView", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Checkout" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@* -------------------- Checkout Button ---------------------- *@
