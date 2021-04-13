@@ -223,6 +223,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         public ActionResult ConcessionsRemoveItemView(string itemName)
         {
             ViewBag.itemName = itemName;
+            StorageView();
             return View("ConcessionsRemoveItemView");
         }
 
@@ -266,7 +267,8 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                 success = false;
             }
 
-            return View("ConcessionsView");
+            StorageView();
+            return View("StorageView");
             //if (success)
 
             //    StorageView();
@@ -316,7 +318,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                 success = false;
             }
 
-            return View("ConcessionsView");
+            return View("StorageView");
             //if (success)
 
             //    StorageView();

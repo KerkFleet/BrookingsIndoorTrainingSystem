@@ -25,17 +25,17 @@
 @*@/* end green bar - Shelby */*@
 <table>
     <tr>
-        <th>Item</th>
-        <th>Amount</th>
-        <th>Location</th>
+        <th>Item &nbsp;</th>
+        <th>Amount &nbsp;</th>
+        <th>Location &nbsp;</th>
     </tr>
     @foreach (var item in Model)
     {
         <tr>
 
-            <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName, id = item.id }, null) </td>
-            <td>@item.itemAmount</td>
-            <td>@item.itemLoc </td>
+            <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName, id = item.id }, null) &nbsp;</td>
+            <td>@item.itemAmount &nbsp;</td>
+            <td>@item.itemLoc &nbsp;</td>
 
         </tr>
     }
