@@ -534,7 +534,81 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
         public ActionResult FundsView()
         {
-            return View();
+            string sql = "SELECT * FROM Funds";
+
+            var model = new FundsModel();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var item = new FundsModel();
+                    item.id = (int)rdr["Id"];
+                    item.Concessions = (int)rdr["Concessions"];
+                    item.BITS = (int)rdr["BITS"];
+                    item.Equipment = (int)rdr["Equipment"];
+                    item.Space = (int)rdr["Space"];
+                    model = item;
+                }
+            }
+            return View(model);
         }
+
+        public ActionResult FundsUpdateConcesssionsView(int funds)
+        {
+
+            var model = new FundsModel();
+            model.Concessions = funds;
+
+            return View(model);
+        }
+
+        public ActionResult FundsUpdateConcesssions(int amount)
+        {
+            string queryString2;
+            bool success = true;
+            //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
+            if (amount > 0)
+            {
+
+                queryString2 = "UPDATE Funds SET Concessions = @Amount WHERE Id = 1";
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    //here is where we connect to the database and perform the SQL command
+                    SqlCommand command = new SqlCommand(queryString2, connection);
+
+                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                    command.Parameters.Add("@Amount", System.Data.SqlDbType.Int).Value = amount;
+
+                    //basically a test to make sure it worked, and catch exception
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+                }
+
+                success = true;
+            }
+            else
+            {
+                success = false;
+            }
+
+            FundsView();
+            return View("FundsView");
+        }
+
+        // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
     }
 }

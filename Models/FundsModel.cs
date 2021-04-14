@@ -8,10 +8,10 @@ namespace BrookingsIndoorTrainingSystem.Models
     public class FundsModel
     {
         public int id { get; set; }
-        public float Concessions { get; set; }
-        public float Equipment { get; set; }
-        public float Space { get; set; }
-        public float BITS { get; set; }
+        public int Concessions { get; set; }
+        public int Equipment { get; set; }
+        public int Space { get; set; }
+        public int BITS { get; set; }
 
     }
 }

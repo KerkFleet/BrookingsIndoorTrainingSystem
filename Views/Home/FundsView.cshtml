@@ -1,17 +1,56 @@
-﻿
+﻿@model BrookingsIndoorTrainingSystem.Models.FundsModel
+
 @{
-    Layout = null;
+    ViewBag.Title = "FundsView";
+    ViewBag.Concessions = Model.Concessions;
 }
 
-<!DOCTYPE html>
+<h1>FundsView</h1>
 
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>FundsView</title>
-</head>
-<body>
-    <div> 
+
+@* -------------------- Funds Chart ---------------------- *@
+@using (Html.BeginForm("FundsView", "Home", FormMethod.Post))
+{
+    <h3>Click the account amount update funds</h3>
+
+    <table>
+        <tr style="font-size: 25px;">
+            <th style="font-size: 25px;">BITS &nbsp;</th>
+            <th style="font-size: 25px;">Concessions &nbsp;</th>
+            <th style="font-size: 25px;">Equipment &nbsp;</th>
+            <th style="font-size: 25px;">Space &nbsp;</th>
+        </tr>
+
+        <tr>
+            @*<td>@Html.ActionLink(@Model.BITS, "FundsUpdateView", "Home") &nbsp;</td>*@
+            <td>$ @Model.BITS &nbsp;</td>
+            <td>$ @Model.Concessions &nbsp;</td>
+            <td>$ @Model.Equipment &nbsp;</td>
+            <td>$ @Model.Space &nbsp;</td>
+
+        </tr>
+    </table>
+}
+@* -------------------- Funds Chart ---------------------- *@
+
+
+
+
+
+@* -------------------- Update Concesssions Button ---------------------- *@
+@using (Html.BeginForm("FundsUpdateConcesssionsView", "Home", new { funds = ViewBag.Concessions }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    @*<input type="submit" value="Update Concessions" class="button" />*@
+                    <input type="submit" value="Update Concessions" class="btn btn-default" />
+                </div>
+            </div>
+        </center>
     </div>
-</body>
-</html>
+}
+@* -------------------- Update Concesssions Cart ---------------------- *@
