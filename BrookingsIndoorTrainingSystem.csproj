@@ -194,6 +194,7 @@
     <Content Include="Views\Home\EquipmentMoveItemView.cshtml" />
     <Content Include="Views\Home\FundsView.cshtml" />
     <Content Include="Views\Home\FundsUpdateConcesssionsView.cshtml" />
+    <Content Include="Views\Home\FundsMakePaymentView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

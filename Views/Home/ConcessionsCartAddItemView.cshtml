@@ -3,7 +3,7 @@
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 
 
-@using (Html.BeginForm("ConcessionsCartAddItem", "Home", new { itemName = ViewBag.itemName, id = ViewBag.id }, FormMethod.Post))
+@using (Html.BeginForm("ConcessionsCartAddItem", "Home", new { itemName = ViewBag.itemName, id = ViewBag.id, itemPrice = ViewBag.itemPrice }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

@@ -31,6 +31,7 @@ namespace BrookingsIndoorTrainingSystem.Models
 
     public static class GlobalConcessionsCartModel
     {
+        public static int total { get; set; }
         public static List<ConcessionsModel> cart { get; set; }
     }
 

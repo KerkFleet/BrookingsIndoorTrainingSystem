@@ -110,6 +110,9 @@
             </tr>
         }
     </table>
+    <hr />
+    <th>Total &nbsp;</th>
+    <h5>$ @BrookingsIndoorTrainingSystem.Models.GlobalConcessionsCartModel.total</h5>
 }
 @* -------------------- Concessions Storage Chart ---------------------- *@
 
@@ -133,7 +136,7 @@
 <hr />
 
 @* -------------------- Checkout Button ---------------------- *@
-@using (Html.BeginForm("ConcessionsCheckoutView", "Home", FormMethod.Post))
+@using (Html.BeginForm("FundsMakePaymentView", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 

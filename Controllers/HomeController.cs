@@ -19,7 +19,9 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         //+++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++++
         public ActionResult Index()
         {
+            // Initalize Cart
             GlobalConcessionsCartModel.cart = new List<ConcessionsModel>();
+            GlobalConcessionsCartModel.total = 0;
             return View();
         }
 
@@ -437,14 +439,15 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View(model);
         }
 
-        public ActionResult ConcessionsCartAddItemView(string itemName, int id)
+        public ActionResult ConcessionsCartAddItemView(string itemName, int id, int itemPrice)
         {
             ViewBag.itemName = itemName;
             ViewBag.id = id;
+            ViewBag.itemPrice = itemPrice;
             return View();
         }
 
-        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName, int id)
+        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName, int id, int itemPrice)
         {
             string queryString;
             bool success = true;
@@ -486,12 +489,13 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             if (success == true)
             {
                 GlobalConcessionsCartModel.cart.Add(item);
+                GlobalConcessionsCartModel.total += itemPrice*item.itemAmount;
                 ConcessionsCartView();
                 return View("ConcessionsCartView");
             }
             else
             {
-                ConcessionsCartAddItemView(itemName, id);
+                ConcessionsCartAddItemView(itemName, id, item.itemPrice);
                 return View("ConcessionsCartAddItemView");
             }
 
@@ -504,8 +508,6 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                 // if it is List<String>
                 if (GlobalConcessionsCartModel.cart[i].id == id)
                 {
-                    GlobalConcessionsCartModel.cart.RemoveAt(i);
-                    //
 
                     string queryString;
                     bool success = true;
@@ -536,16 +538,32 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                             }
                         }
 
-
+                    GlobalConcessionsCartModel.total -= GlobalConcessionsCartModel.cart[i].itemPrice * GlobalConcessionsCartModel.cart[i].itemAmount;
+                    GlobalConcessionsCartModel.cart.RemoveAt(i);
 
                 }
             }
             ConcessionsCartView();
             return View("ConcessionsCartView");
         }
-
-
+        
+        public ActionResult ConcessionsClearCart()
+        {
+            for(int i = 0; i < GlobalConcessionsCartModel.cart.Count;)
+            {
+                GlobalConcessionsCartModel.cart.RemoveAt(i);
+            }
+            GlobalConcessionsCartModel.total = 0;
+            ConcessionsMakeSaleView();
+            return View("ConcessionsMakeSaleView");
+        }
         // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
+        public ActionResult FundsMakePaymentView(string itemName)
+        {
+            ViewBag.itemName = itemName;
+            return View();
+        }
+
         public ActionResult FundsView()
         {
             string sql = "SELECT * FROM Funds";
