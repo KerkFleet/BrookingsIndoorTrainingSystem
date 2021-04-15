@@ -1,11 +1,94 @@
 ﻿@model List<BrookingsIndoorTrainingSystem.Models.ConcessionsModel>
+<html>
+<head>
+    <style>
+        .button {
+            /* Regular button */
+            /*background-color: #4CAF50;
+            Green border: solid;
+            border-color: black;
+            border-width: thin;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+            */
+            /* Flat button */
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: solid;
+            border-width: thin;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            /* Inne button */
+            @*border-radius: 10px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;*@
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>
 
 @{
     ViewBag.Title = "ConcessionsCartView";
 }
 
-<h1>Shopping Cart</h1>
-<h4>Click item to remove it from cart</h4>
+<div class="form-horizontal">
+    <center>
+        <div class="form-group">
+            <div>
+                <h5>@Html.Label("Shopping Cart", new { style = "font-size:40px; color:#36e800" })</h5>
+
+                @*@/* green bar - Shelby */*@
+                <html>
+
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                <body>
+                    <div class="w3-container">
+
+
+                        <div class="w3-bar w3-border w3-gray">
+                            <div class="w3-bar-item"></div>
+
+                        </div>
+
+                    </div>
+                </body>
+            </html>
+            @*@/* end green bar - Shelby */*@
+
+        </div>
+    </div>
+</center>
+</div>
+
+<h4>Click Remove to remove item from cart</h4>
 
 @* -------------------- Concessions Storage Chart ---------------------- *@
 @using (Html.BeginForm("ConcessionsCartView", "Home", FormMethod.Post))
@@ -14,15 +97,17 @@
         <tr>
             <th>Item &nbsp;</th>
             <th>Amount &nbsp;</th>
+            <th>Price &nbsp;</th>
         </tr>
         @foreach (var item in Model)
         {
-    <tr>
+            <tr>
 
-            <td>@item.itemName &nbsp;</td>
-            <td>@item.itemAmount &nbsp;</td>
-            <td>@Html.ActionLink("Remove", "ConcessionsCartRemoveItem", "Home", new { itemName = item.itemName, id = item.id }, null) &nbsp;</td>
-    </tr>
+                <td>@item.itemName &nbsp;</td>
+                <td>@item.itemAmount &nbsp;</td>
+                <td>@item.itemPrice &nbsp;</td>
+                <td>$ @Html.ActionLink("Remove", "ConcessionsCartRemoveItem", "Home", new { itemName = item.itemName, id = item.id }, null) &nbsp;</td>
+            </tr>
         }
     </table>
 }

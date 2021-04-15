@@ -11,6 +11,7 @@ namespace BrookingsIndoorTrainingSystem.Models
         public string itemName { get; set; }
         public int itemAmount { get; set; }
         public string itemLoc { get; set; }
+        public int itemPrice { get; set; }
 
     }
 

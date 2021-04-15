@@ -1,12 +1,93 @@
 ﻿@model BrookingsIndoorTrainingSystem.Models.FundsModel
+<html>
+<head>
+    <style>
+        .button {
+            /* Regular button */
+            /*background-color: #4CAF50;
+            Green border: solid;
+            border-color: black;
+            border-width: thin;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+            */
+            /* Flat button */
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: solid;
+            border-width: thin;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            /* Inne button */
+            @*border-radius: 10px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;*@
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>
 
 @{
     ViewBag.Title = "FundsView";
     ViewBag.Concessions = Model.Concessions;
 }
 
-<h1>FundsView</h1>
+<div class="form-horizontal">
+    <center>
+        <div class="form-group">
+            <div>
+                <h5>@Html.Label("Funds Manager", new { style = "font-size:40px; color:#36e800" })</h5>
 
+                @*@/* green bar - Shelby */*@
+                <html>
+
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                <body>
+                    <div class="w3-container">
+
+
+                        <div class="w3-bar w3-border w3-gray">
+                            <div class="w3-bar-item"></div>
+
+                        </div>
+
+                    </div>
+                </body>
+            </html>
+            @*@/* end green bar - Shelby */*@
+
+        </div>
+    </div>
+</center>
+</div>
 
 @* -------------------- Funds Chart ---------------------- *@
 @using (Html.BeginForm("FundsView", "Home", FormMethod.Post))
@@ -38,6 +119,7 @@
 
 
 @* -------------------- Update Concesssions Button ---------------------- *@
+<br />
 @using (Html.BeginForm("FundsUpdateConcesssionsView", "Home", new { funds = ViewBag.Concessions }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
@@ -46,8 +128,7 @@
         <center>
             <div class="form-group">
                 <div>
-                    @*<input type="submit" value="Update Concessions" class="button" />*@
-                    <input type="submit" value="Update Concessions" class="btn btn-default" />
+                    <input type="submit" value="Update Concessions" class="button" />
                 </div>
             </div>
         </center>

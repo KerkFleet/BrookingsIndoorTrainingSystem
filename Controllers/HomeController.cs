@@ -382,6 +382,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     item.itemName = (string)rdr["Item_Name"];
                     item.itemAmount = (int)rdr["Item_Amount"];
                     item.itemLoc = (string)rdr["Item_Loc"];
+                    item.itemPrice = (int)rdr["Item_Price"];
                     model.Add(item);
 
                 }
@@ -420,6 +421,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     item.itemName = (string)rdr["Item_Name"];
                     item.itemAmount = (int)rdr["Item_Amount"];
                     item.itemLoc = (string)rdr["Item_Loc"];
+                    item.itemPrice = (int)rdr["Item_Price"];
                     model.Add(item);
 
                 }

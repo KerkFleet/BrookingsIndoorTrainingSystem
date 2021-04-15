@@ -1,48 +1,95 @@
 ﻿@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 @model BrookingsIndoorTrainingSystem.Models.FundsModel
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+<html>
+<head>
+    <style>
+        .button {
+            /* Regular button */
+            /*background-color: #4CAF50;
+            Green border: solid;
+            border-color: black;
+            border-width: thin;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+            */
+            /* Flat button */
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: solid;
+            border-width: thin;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            /* Inne button */
+            @*border-radius: 10px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;*@
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>
 
 @{
     ViewBag.Title = "FundsUpdateConcesssionsView";
     //ViewBag.Concessions = Model.Concessions;
 }
 
-<h2>FundsUpdateConcesssionsView</h2>
+
+<div class="form-horizontal">
+    <center>
+        <div class="form-group">
+            <div>
+                <h5>@Html.Label("Update Concesssions Funds", new { style = "font-size:40px; color:#36e800" })</h5>
+
+                @*@/* green bar - Shelby */*@
+                <html>
+
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                <body>
+                    <div class="w3-container">
 
 
-@using (Html.BeginForm("FundsUpdateConcesssions", "Home", new { Amount = Model.Concessions, }, FormMethod.Post))
-{
-    @Html.AntiForgeryToken()
-
-    <div class="form-horizontal">
-        <h3 class="left">
-            Concessions Funds
-        </h3>
-        <center>
-            <div class="form-group">
-                <div class="col-md-10">
-
-                    @*@/* green bar - Shelby */*@
-                    <html>
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-                    <body>
-                        <div class="w3-container">
-
-
-                            <div class="w3-bar w3-border w3-#36e800">
-                                <div class="w3-bar-item"></div>
-
-                            </div>
+                        <div class="w3-bar w3-border w3-gray">
+                            <div class="w3-bar-item"></div>
 
                         </div>
-                    </body>
-                </html>
-                @*@/* end green bar - Shelby */*@
 
-            </div>
+                    </div>
+                </body>
+            </html>
+            @*@/* end green bar - Shelby */*@
+
         </div>
-    </center>
+    </div>
+</center>
 </div>
 
 <hr />
@@ -72,10 +119,10 @@
                                 @Html.ValidationMessageFor(model => model.Concessions, "", new { @class = "text-danger" })
                             </div>
                         </div>
-
+                        <br />
                         <div class="form-group">
                             <div class="col-md-8">
-                                <input type="submit" value="Submit" class="btn btn-default" />
+                                <input type="submit" value="Submit" class="button" />
                             </div>
                         </div>
                     </div>
@@ -91,4 +138,3 @@
 </div>
 
 </div>
-}
