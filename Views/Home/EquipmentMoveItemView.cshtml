@@ -4,7 +4,7 @@
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 
 @{ ViewBag.Title = "Equipment Move items"; }
-
+@using System.Data.SqlClient;
 
 <!DOCTYPE html>
 <html>
@@ -32,40 +32,233 @@
 
                         </div>
 
+                        @{
+                            string item = Request.Form["Items"];
+                            int amount = Request.Form["quantity"].AsInt();
+                            string Location = Request.Form["Location"];
+
+                            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS Database; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
+                            //SqlConnection connection = new SqlConnection(connectionString);
+
+                            string queryString = "DELETE from Equipment where name = @item;";
+                            // SqlCommand command = new SqlCommand(queryString, connection);
 
 
-                        <div class="form-horizontal">
-                            <form method="post">
-                                <fieldset>
-                                    <select id="Items" name="Items">
-                                        <option value="SoccerBall">Soccer Balls</option>
-                                        <option value="BasketBall">Basket Balls</option>
-                                    </select>
-                                    <select id="Spaces" name="space">
-                                        <option value="Track">Track</option>
-                                        <option value="Batting Cage">Batting Cage</option>
-                                        <option value="Field">Field</option>
-                                        <option value="Storage">Storage</option>
-                                    </select>
-                                    <input type="submit" />
-                                </fieldset>
-                            </form>
-                        </div>
-                       
+                            using (SqlConnection connection = new SqlConnection(connectionString))
+                            {
+
+
+                                string selectQuery = "Select * from Equipment";
+                                SqlCommand command2 = new SqlCommand(selectQuery, connection);
+                                //command2.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
+                                command2.Connection.Open();
+
+                                SqlDataReader reader = command2.ExecuteReader();
+
+                                if (reader.HasRows)
+                                {
+                                   
+
+
+                                                <div class="form-horizontal">
+                                                    <form method="post">
+                                                        
+                                                            <label for="Items">Item ID:</label>
+                                                            <select id="Items" name="Items">
+                                                                @while (reader.Read())
+                                                                {
+                                                                    //@ID = @ID + 1;
+                                                                    <option value="@reader.GetInt32(0)" ;">@reader.GetInt32(0)</option>
+                                                                }
+                                                            </select>
+
+                                                            <label for="quantity">Quantity (between 1 and 5):</label>
+
+                                                            <input type="number" id="quantity" name="quantity" min="1" max="5"/>
+
+                                                            <label for="Location">Item Location</label>
+
+                                                            <select id="Location" name="Location" >
+                                                                <option value="Field">Field</option>
+                                                                <option value="BatCage">Batting Cage</option>
+                                                                <option value="Track">Track</option>
+                                                                <option value="Storage">Storage</option>
+                                                            </select>
+
+                                                            <input type="submit" name="removeButton" />
+                                                        
+                                                    </form>
+                                                    </div>
+                                                
+
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No rows found.");
+                                }
+                                reader.Close();
+
+                                SqlDataReader reader2 = command2.ExecuteReader();
+
+                                if (reader2.HasRows)
+                                {
+                                    <div class="form-horizontal">
+                                        
+                                                <label for="Items">ITEM TABLE.</label>
+
+                                                <table style="width:100%">
+                                                    <tr>
+                                                        <th>ID</th>
+                                                        <th>NAME</th>
+                                                        <th>LOCATION</th>
+                                                        <th>AMOUNT</th>
+                                                    </tr>
+                                                    @while (reader2.Read())
+                                                    {
+                                                        //@ID =
+                                                        //<p>ID: @reader2.GetInt32(0) Name: @reader2.GetString(1) Location: @reader2.GetString(2) Amount: @reader2.GetInt32(3)</p>
+                                                        <tr>
+                                                            <td>@reader2.GetInt32(0) </td>
+                                                            <td>@reader2.GetString(1)</td>
+                                                            <td>@reader2.GetString(2)</td>
+                                                            <td>@reader2.GetInt32(3)</td>
+                                                        </tr>
+                                                        //<p>@reader2.GetInt32(0)   @reader2.GetString(1)   @reader2.GetString(2)   @reader2.GetInt32(3)</p>
+
+                                                    }
+                                                </table>
+                                                   
+                                               
+
+                                                
+                                    
+
+                                    </div>
+
+
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No rows found.");
+                                }
+                                reader2.Close();
+                            }
+
+                        }
 
                         @{
                             if (IsPost)
                             {
-                                string item = Request.Form["Items"];
-                                string space = Request.Form["space"];
-                                <div class="col-md-10">
-                                    <text align="left">
-                                        You moved: @item to @space <br />
-                                    </text>
+                                int current_amount;
+                                string QS;
+                                bool success = true;
 
-                                </div>
-                                
-                                
+                                QS = "SELECT * FROM Equipment WHERE Id = @id";
+
+                                using (SqlConnection connection = new SqlConnection(connectionString))
+                                {
+                                    //here is where we connect to the database and perform the SQL command
+                                    SqlCommand command3 = new SqlCommand(QS, connection);
+
+                                    //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                                    command3.Parameters.Add("@id", System.Data.SqlDbType.Int).Value = item;
+                                    Console.WriteLine(item);
+                                    //basically a test to make sure it worked, and catch exception
+                                    // try
+                                    //{
+                                    connection.Open();
+                                    SqlDataReader reader = command3.ExecuteReader();
+                                    reader.Read();
+                                    current_amount = reader.GetInt32(3);
+                                    string name = reader.GetString(1);
+                                    connection.Close();
+                                    connection.Open();
+                                    command3.CommandText = "SELECT * FROM Equipment WHERE Name = @itemName1";
+                                    command3.Parameters.Add("@itemName1", System.Data.SqlDbType.VarChar, 50).Value = name;
+
+
+                                    string location;
+                                    bool exists;
+                                    exists = false;
+                                    int existingID = 0;
+                                    reader = command3.ExecuteReader();
+                                    while (reader.Read())
+                                    {
+                                        //Location = (string)reader["Location"];
+                                        if (Location == reader.GetString(2))
+                                        {
+                                            exists = true;
+                                            existingID = reader.GetInt32(0);
+                                            break;
+                                        }
+
+                                    }
+                                    connection.Close();
+                                    connection.Open();
+                                    if (exists)
+                                    {
+                                        if (amount == current_amount)
+                                        {
+
+                                            // Change the SQL Command and execute
+                                            command3.CommandText = "DELETE FROM Equipment WHERE Id = @id2;";
+                                            command3.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = item;
+                                            command3.ExecuteNonQuery();
+                                            command3.CommandText = "UPDATE Equipment SET Amount += @itemAmount WHERE Id = @existingID";
+                                            command3.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = amount;
+                                            command3.Parameters.Add("@existingID", System.Data.SqlDbType.Int).Value = existingID;
+
+                                            command3.ExecuteNonQuery();
+                                        }
+                                        else if (amount < current_amount && amount > 0)
+                                        {
+                                            command3.CommandText = "UPDATE Equipment SET Amount += @itemAmount WHERE Id = @existingID";
+                                            command3.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = amount;
+                                            command3.Parameters.Add("@existingID", System.Data.SqlDbType.Int).Value = existingID;
+                                            command3.ExecuteNonQuery();
+                                            command3.CommandText = "UPDATE Equipment SET Amount -= @itemAmount2 WHERE Id = @id2";
+                                            command3.Parameters.Add("@itemAmount2", System.Data.SqlDbType.Int).Value = amount;
+                                            command3.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = item;
+                                            command3.ExecuteNonQuery();
+                                        }
+                                    }
+                                    else
+                                    {
+                                        if (amount == current_amount)
+                                        {
+
+                                            // Change the SQL Command and execute
+                                            command3.CommandText = "UPDATE Equipment SET Location = @itemLoc WHERE Id = @id2";
+                                            command3.Parameters.Add("@itemLoc", System.Data.SqlDbType.VarChar, 50).Value = Location;
+                                            command3.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = item;
+                                            command3.ExecuteNonQuery();
+                                        }
+                                        else if (amount < current_amount && amount > 0)
+                                        {
+                                            command3.CommandText = "INSERT INTO Equipment values(@iN, @iL, @iA)";
+                                            command3.Parameters.Add("@iN", System.Data.SqlDbType.VarChar, 50).Value = name;
+                                            command3.Parameters.Add("@iA", System.Data.SqlDbType.Int).Value = amount;
+                                            command3.Parameters.Add("@iL", System.Data.SqlDbType.VarChar, 50).Value = Location;
+                                            command3.ExecuteNonQuery();
+                                            command3.CommandText = "UPDATE Equipment SET Amount -= @itemAmount WHERE Id = @id2";
+                                            command3.Parameters.Add("@itemAmount", System.Data.SqlDbType.Int).Value = amount;
+                                            command3.Parameters.Add("@id2", System.Data.SqlDbType.Int).Value = item;
+                                            command3.ExecuteNonQuery();
+                                        }
+                                    }
+
+
+                                    //}
+                                    // catch (Exception e)
+                                    //{
+                                    //    Console.WriteLine(e.Message);
+                                    //}
+                                }
+
+
+
+
 
                             }
                         }
