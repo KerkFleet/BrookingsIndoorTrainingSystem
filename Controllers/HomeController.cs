@@ -384,7 +384,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     item.itemName = (string)rdr["Item_Name"];
                     item.itemAmount = (int)rdr["Item_Amount"];
                     item.itemLoc = (string)rdr["Item_Loc"];
-                    item.itemPrice = (int)rdr["Item_Price"];
+                    item.itemPrice = (double)rdr["Item_Price"];
                     model.Add(item);
 
                 }
@@ -423,7 +423,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     item.itemName = (string)rdr["Item_Name"];
                     item.itemAmount = (int)rdr["Item_Amount"];
                     item.itemLoc = (string)rdr["Item_Loc"];
-                    item.itemPrice = (int)rdr["Item_Price"];
+                    item.itemPrice = (double)rdr["Item_Price"];
                     model.Add(item);
 
                 }
@@ -439,7 +439,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View(model);
         }
 
-        public ActionResult ConcessionsCartAddItemView(string itemName, int id, int itemPrice)
+        public ActionResult ConcessionsCartAddItemView(string itemName, int id, double itemPrice)
         {
             ViewBag.itemName = itemName;
             ViewBag.id = id;
@@ -447,7 +447,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View();
         }
 
-        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName, int id, int itemPrice)
+        public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName, int id, double itemPrice)
         {
             string queryString;
             bool success = true;
@@ -580,10 +580,10 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                 {
                     var item = new FundsModel();
                     item.id = (int)rdr["Id"];
-                    item.Concessions = (int)rdr["Concessions"];
-                    item.BITS = (int)rdr["BITS"];
-                    item.Equipment = (int)rdr["Equipment"];
-                    item.Space = (int)rdr["Space"];
+                    item.Concessions = (double)rdr["Concessions"];
+                    item.BITS = (double)rdr["BITS"];
+                    item.Equipment = (double)rdr["Equipment"];
+                    item.Space = (double)rdr["Space"];
                     model = item;
                 }
             }

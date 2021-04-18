@@ -11,7 +11,7 @@ namespace BrookingsIndoorTrainingSystem.Models
         public string itemName { get; set; }
         public int itemAmount { get; set; }
         public string itemLoc { get; set; }
-        public int itemPrice { get; set; }
+        public double itemPrice { get; set; }
 
     }
 
@@ -31,7 +31,7 @@ namespace BrookingsIndoorTrainingSystem.Models
 
     public static class GlobalConcessionsCartModel
     {
-        public static int total { get; set; }
+        public static double  total { get; set; }
         public static List<ConcessionsModel> cart { get; set; }
     }
 
