@@ -619,7 +619,9 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         public ActionResult FundsUpdate(FundsModel funds, string location)
         {
+            string queryString3 = "";
             string queryString2 = "";
+            string queryString1 = "";
             bool success = true;
             double amount = 0;
             if (location == "Concessions")
@@ -644,21 +646,38 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             if (amount > 0)
             {
 
-               
 
+
+
+                queryString1 = "SELECT * FROM Funds";
+                queryString3 = "UPDATE Funds SET BITS += @difference WHERE Id = 1";
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     //here is where we connect to the database and perform the SQL command
-                    SqlCommand command = new SqlCommand(queryString2, connection);
+                    SqlCommand command = new SqlCommand(queryString1, connection);
 
                     //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
-                    command.Parameters.Add("@Amount", System.Data.SqlDbType.Float).Value = amount;
+
 
                     //basically a test to make sure it worked, and catch exception
                     try
                     {
                         connection.Open();
                         SqlDataReader reader = command.ExecuteReader();
+                        reader.Read();
+                        double current = (double)reader[location];
+                        double difference;
+                        difference = current - amount;
+                        connection.Close();
+                        connection.Open();
+                        command.CommandText = queryString3;
+                        command.Parameters.Add("@difference", System.Data.SqlDbType.Float).Value = difference;
+                        command.ExecuteNonQuery();
+                        connection.Close();
+                        connection.Open();
+                        command.CommandText = queryString2;
+                        command.Parameters.Add("@Amount", System.Data.SqlDbType.Float).Value = amount;
+                        command.ExecuteNonQuery();
 
                     }
                     catch (Exception e)
