@@ -479,15 +479,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     }
                 }
 
-                success = true;
-            }
-            else
-            {
-                success = false;
-            }
-
-            if (success == true)
-            {
+                ViewBag.Error = "";
                 GlobalConcessionsCartModel.cart.Add(item);
                 GlobalConcessionsCartModel.total += itemPrice*item.itemAmount;
                 ConcessionsCartView();
@@ -495,6 +487,8 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             }
             else
             {
+                ViewBag.Error = "Error: Can not add negative item amounts";
+
                 ConcessionsCartAddItemView(itemName, id, item.itemPrice);
                 return View("ConcessionsCartAddItemView");
             }
