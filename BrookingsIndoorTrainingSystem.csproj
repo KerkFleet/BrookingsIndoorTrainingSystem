@@ -199,6 +199,7 @@
     <Content Include="Views\Home\FundsUpdateEquipmentView.cshtml" />
     <Content Include="Views\Home\FundsUpdateSpaceView.cshtml" />
     <Content Include="Views\Home\ScheduleEmployeeView.cshtml" />
+    <Content Include="Views\Home\ScheduleUpdateEmployeeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

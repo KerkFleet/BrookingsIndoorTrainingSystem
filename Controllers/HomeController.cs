@@ -728,6 +728,13 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             funds.Concessions = newAmount;
             FundsUpdate(funds, location);
         }
+
+        public ActionResult ScheduleUpdateEmployeeView(string employee)
+        {
+
+            return View();
+        }
+
         // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
     }
 }
