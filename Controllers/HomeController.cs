@@ -590,7 +590,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View(model);
         }
 
-        public ActionResult FundsUpdateConcesssionsView(int funds)
+        public ActionResult FundsUpdateConcesssionsView(double funds)
         {
 
             var model = new FundsModel();
@@ -599,15 +599,52 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View(model);
         }
 
-        public ActionResult FundsUpdateConcesssions(int amount)
+        public ActionResult FundsUpdateEquipmentView(double funds)
         {
-            string queryString2;
+
+            var model = new FundsModel();
+            model.Equipment = funds;
+
+            return View(model);
+        }
+
+        public ActionResult FundsUpdateSpaceView(double funds)
+        {
+
+            var model = new FundsModel();
+            model.Space = funds;
+
+            return View(model);
+        }
+
+        public ActionResult FundsUpdate(FundsModel funds, string location)
+        {
+            string queryString2 = "";
             bool success = true;
+            double amount = 0;
+            if (location == "Concessions")
+            {
+                amount = funds.Concessions;
+                queryString2 = "UPDATE Funds SET Concessions = @Amount WHERE Id = 1";
+            }
+            
+            else if (location == "Equipment")
+            {
+                amount = funds.Equipment;
+                queryString2 = "UPDATE Funds SET Equipment = @Amount WHERE Id = 1";
+            }
+          
+            else if (location == "Space")
+            {
+                amount = funds.Space;
+                queryString2 = "UPDATE Funds SET Space = @Amount WHERE Id = 1";
+            }
+               
             //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
             if (amount > 0)
             {
 
-                queryString2 = "UPDATE Funds SET Concessions = @Amount WHERE Id = 1";
+               
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
@@ -615,7 +652,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     SqlCommand command = new SqlCommand(queryString2, connection);
 
                     //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
-                    command.Parameters.Add("@Amount", System.Data.SqlDbType.Int).Value = amount;
+                    command.Parameters.Add("@Amount", System.Data.SqlDbType.Float).Value = amount;
 
                     //basically a test to make sure it worked, and catch exception
                     try

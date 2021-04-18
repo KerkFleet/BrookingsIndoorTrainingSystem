@@ -57,6 +57,8 @@
 @{
     ViewBag.Title = "FundsView";
     ViewBag.Concessions = Model.Concessions;
+    ViewBag.Equipment = Model.Equipment;
+    ViewBag.Space = Model.Space;
 }
 
 <div class="form-horizontal">
@@ -128,10 +130,48 @@
         <center>
             <div class="form-group">
                 <div>
-                    <input type="submit" value="Update Concessions" class="button" />
+                    <input type="submit" value="Update Concessions Funds" class="button" />
                 </div>
             </div>
         </center>
     </div>
 }
-@* -------------------- Update Concesssions Cart ---------------------- *@
+@* -------------------- Update Concesssions Button ---------------------- *@
+
+
+@* -------------------- Update Concesssions Button ---------------------- *@
+<br />
+@using (Html.BeginForm("FundsUpdateEquipmentView", "Home", new { funds = ViewBag.Equipment }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Update Equipment Funds" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@* -------------------- Update Concesssions Button ---------------------- *@
+
+@* -------------------- Update Concesssions Button ---------------------- *@
+<br />
+@using (Html.BeginForm("FundsUpdateSpaceView", "Home", new { funds = ViewBag.Space }, FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+                    <input type="submit" value="Update Space Funds" class="button" />
+                </div>
+            </div>
+        </center>
+    </div>
+}
+@* -------------------- Update Concesssions Button ---------------------- *@
+

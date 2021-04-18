@@ -42,16 +42,15 @@
 </body>
 </html>
 
-@using (Html.BeginForm("FundsUpdate", "Home", new { location = "Concessions" }, FormMethod.Post))
+@using (Html.BeginForm("FundsUpdate", "Home", new { location = "Equipment" }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
-
 
     <div class="form-horizontal">
         <center>
             <div class="form-group">
                 <div>
-                    <h5>@Html.Label("Update Concesssions Funds", new { style = "font-size:40px; color:#36e800" })</h5>
+                    <h5>@Html.Label("Update Equipment Funds", new { style = "font-size:40px; color:#36e800" })</h5>
 
                     @*@/* green bar - Shelby */*@
                     <html>
@@ -85,7 +84,7 @@
         <div class="col-md-10">
             <font size="4" face="helvetica">
                 <h3 class="left">
-                    Concessions Funds currently has:
+                    Equipment Funds currently has:
                 </h3>
                 <h2 class="left" style="color:#36e800;">
                     &nbsp; $ @*@Model.Concessions*@
@@ -94,14 +93,14 @@
                 <body>
 
 
-                    @*input boxes to update items - shelby*@
+                    @*input boxes to update items*@
                     <div class="form-horizontal">
 
 
                         <div class="form-group">
                             <div class="col-md-10">
-                                @Html.EditorFor(model => model.Concessions, new { htmlAttributes = new { @class = "form-control" } })
-                                @Html.ValidationMessageFor(model => model.Concessions, "", new { @class = "text-danger" })
+                                @Html.EditorFor(model => model.Equipment, new { htmlAttributes = new { @class = "form-control" } })
+                                @Html.ValidationMessageFor(model => model.Equipment, "", new { @class = "text-danger" })
                             </div>
                         </div>
                         <br />
