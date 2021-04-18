@@ -31,13 +31,14 @@
     </tr>
     @foreach (var item in Model)
     {
-        <tr>
+<tr>
 
-            <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName, id = item.id }, null) &nbsp;</td>
-            <td>@item.itemAmount &nbsp;</td>
-            <td>@item.itemLoc &nbsp;</td>
+    <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName, id = item.id }, null) &nbsp;</td>
+    <td>@item.itemAmount &nbsp;</td>
+    <td>@item.itemLoc &nbsp;</td>
 
-        </tr>
+
+</tr>
     }
 </table>
 

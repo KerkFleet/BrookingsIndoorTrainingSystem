@@ -569,7 +569,6 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             string sql = "SELECT * FROM Funds";
 
             var model = new FundsModel();
-
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 SqlCommand cmd = new SqlCommand(sql, connection);
