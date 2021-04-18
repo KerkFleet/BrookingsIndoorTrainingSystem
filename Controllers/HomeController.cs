@@ -549,14 +549,19 @@ namespace BrookingsIndoorTrainingSystem.Controllers
         
         public ActionResult ConcessionsClearCart()
         {
-            for(int i = 0; i < GlobalConcessionsCartModel.cart.Count;)
+            // Update Funds Database
+            FundsAddtoFunds(GlobalConcessionsCartModel.total, "Concessions");
+
+            for (int i = 0; i < GlobalConcessionsCartModel.cart.Count;)
             {
                 GlobalConcessionsCartModel.cart.RemoveAt(i);
             }
             GlobalConcessionsCartModel.total = 0;
             ConcessionsMakeSaleView();
+
             return View("ConcessionsMakeSaleView");
         }
+
         // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
         public ActionResult FundsMakePaymentView(string itemName)
         {
@@ -696,6 +701,33 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View("FundsView");
         }
 
+        public void FundsAddtoFunds(double amount, string location)
+        {
+            // Get old amount
+            double oldAmount = 0;
+            string sql = "SELECT * FROM Funds";
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    oldAmount = (double)rdr["Concessions"];
+                }
+            }
+            // Get old amount
+
+            // Get new amount
+            double newAmount = oldAmount + amount;
+
+            // Update new amount
+            FundsModel funds = new FundsModel();
+            funds.Concessions = newAmount;
+            FundsUpdate(funds, location);
+        }
         // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
     }
 }
