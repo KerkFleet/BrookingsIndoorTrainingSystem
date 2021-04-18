@@ -1,0 +1,127 @@
+﻿.exampleContainer {
+    position: relative;
+}
+
+    .exampleContainer .clear {
+        clear: both;
+    }
+
+.rpTemplate {
+    padding-top: 5px;
+}
+
+.qsf-demo-container .RadScheduler {
+    margin: 0 60px 30px 0;
+    float: left;
+}
+
+.qsf-demo-container .RadPanelBar {
+    float: left;
+}
+
+    /** Scrolling */
+    .qsf-demo-container .RadPanelBar .rpSlide {
+        overflow: auto;
+    }
+
+        .qsf-demo-container .RadPanelBar .rpSlide .rpTemplate {
+            height: auto !important;
+        }
+
+.qsf-demo-container .exampleContainer {
+    zoom: 1;
+}
+
+    .qsf-demo-container .exampleContainer:after {
+        content: "";
+        display: block;
+        clear: both;
+    }
+
+.rsHorizontalHeaderTable div {
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.rpTemplate ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    margin-top: 2px;
+}
+
+    .rpTemplate ul li {
+        line-height: 30px;
+        margin: 0 0 3px 10px;
+    }
+
+.rpTemplate .propertyLabel {
+    width: 190px;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+
+/** Button group */
+.rbPrimaryIcon {
+    background-image: url("images/qsf-demo-icon-sprite.png");
+}
+
+.qsf-btn-group {
+    background-position: 0 0;
+}
+
+.qsf-btn-ungroup {
+    background-position: 0 -32px;
+}
+
+/** radioButtonContainer */
+.qsf-demo-container .radioButtonContainer {
+    width: 192px;
+    float: right;
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+}
+
+.qsf-demo-container .propertyLabelToFloat {
+    *float: left;
+}
+
+.qsf-demo-container .radioButtonContainer .RadButton {
+    display: block;
+}
+
+html .qsf-demo-container .radioButtonContainer .rbPrimaryIcon.rbToggleRadio,
+html .qsf-demo-container .radioButtonContainer .rbSecondaryIcon.rbToggleRadio,
+html .qsf-demo-container .radioButtonContainer .rbPrimaryIcon.rbToggleCheckbox,
+html .qsf-demo-container .radioButtonContainer .rbSecondaryIcon.rbToggleCheckbox,
+html .qsf-demo-container .radioButtonContainer .rbPrimaryIcon.rbToggleRadioChecked,
+html .qsf-demo-container .radioButtonContainer .rbSecondaryIcon.rbToggleRadioChecked,
+html .qsf-demo-container .radioButtonContainer .rbPrimaryIcon.rbToggleCheckboxChecked,
+html .qsf-demo-container .radioButtonContainer .rbSecondaryIcon.rbToggleCheckboxChecked,
+html .qsf-demo-container .radioButtonContainer .rbPrimaryIcon.rbToggleCheckboxFilled,
+html .qsf-demo-container .radioButtonContainer .rbSecondaryIcon.rbToggleCheckboxFilled {
+    top: 8px;
+}
+
+
+
+/** Button hint */
+.qsf-btn-hint {
+    width: 16px;
+    height: 16px;
+    border: 1px solid #e7e7e7;
+    border-radius: 8px;
+    background: #f8f8f8;
+    line-height: 16px;
+    text-align: center;
+    display: inline-block;
+    cursor: help;
+}
+
+/** Font size for BlackMetroTouch, MetroTouch, Silk and Glow skins */
+.exampleContainer .RadPanelBar_BlackMetroTouch .propertyLabel,
+.exampleContainer .RadPanelBar_MetroTouch .propertyLabel {
+    font-size: 16px;
+}

@@ -696,6 +696,43 @@ namespace BrookingsIndoorTrainingSystem.Controllers
             return View("FundsView");
         }
 
-        // ++++++++++++++++++++++++++++ FUNDS Controllers  ++++++++++++++++++++++++++ //
+
+        public ActionResult ScheduleEmployeeView()
+        {
+
+            string sql = "SELECT * FROM Schedule";
+
+            var model = new List<ScheduleModel>();
+
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                SqlCommand cmd = new SqlCommand(sql, connection);
+
+
+
+
+                connection.Open();
+                SqlDataReader rdr = cmd.ExecuteReader();
+                while (rdr.Read())
+                {
+                    var item = new ScheduleModel();
+                    item.Id = (int)rdr["Id"];
+                    item.Monday = (string)rdr["Monday"];
+                    item.Tuesday = (string)rdr["Tuesday"];
+                    item.Wednesday = (string)rdr["Wednesday"];
+                    item.Thursday = (string)rdr["Thursday"];
+                    item.Friday = (string)rdr["Friday"];
+                    item.Saturday = (string)rdr["Saturday"];
+                    model.Add(item);
+
+                }
+            }
+            return View(model);
+        }
+
+
+
+
     }
+
 }

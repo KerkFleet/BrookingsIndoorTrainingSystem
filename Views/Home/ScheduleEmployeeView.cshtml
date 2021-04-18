@@ -1,0 +1,40 @@
+﻿@model List<BrookingsIndoorTrainingSystem.Models.ScheduleModel>
+
+@* -------------------- Funds Chart ---------------------- *@
+@using (Html.BeginForm("FundsView", "Home", FormMethod.Post))
+{
+    <h3>Click the account amount to update funds</h3>
+
+    <grid>
+        <tr style="font-size: 25px;">
+            <th style="font-size: 25px;">Dates &nbsp;</th>
+            <th style="font-size: 25px;">Monday &nbsp;</th>
+            <th style="font-size: 25px;">Tuesday &nbsp;</th>
+            <th style="font-size: 25px;">Wednesday &nbsp;</th>
+            <th style="font-size: 25px;">Thurday &nbsp;</th>
+            <th style="font-size: 25px;">Friday &nbsp;</th>
+            <th style="font-size: 25px;">Saturday &nbsp;</th>
+
+        </tr>
+
+        <tr>
+
+            @foreach (var item in Model)
+            {
+                <td> $@item.Dates &nbsp; </td>
+                <td>$ @Html.ActionLink(item.Monday, "ScheduleUpdateEmployee", "Home", new { employee = item.Monday }, null)&nbsp;</td>
+                <td>$ @Html.ActionLink(item.Tuesday, "ScheduleUpdateEmployee", "Home", new { employee = item.Tuesday }, null)&nbsp;</td>
+                <td>$ @Html.ActionLink(item.Wednesday, "ScheduleUpdateEmployee", "Home", new { employee = item.Wednesday }, null)&nbsp;</td>
+                <td>$ @Html.ActionLink(item.Thursday, "ScheduleUpdateEmployee", "Home", new { employee = item.Thursday }, null)&nbsp;</td>
+                <td>$ @Html.ActionLink(item.Friday, "ScheduleUpdateEmployee", "Home", new { employee = item.Friday }, null)&nbsp;</td>
+                <td>$ @Html.ActionLink(item.Saturday, "ScheduleUpdateEmployee", "Home", new { employee = item.Saturday }, null)&nbsp;</td>
+
+            }
+
+
+        </tr>
+
+
+    </grid>
+}
+

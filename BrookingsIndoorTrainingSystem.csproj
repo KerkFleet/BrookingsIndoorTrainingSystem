@@ -130,6 +130,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\ScheduleModel.cs" />
     <Compile Include="Models\EquipmentModel.cs" />
     <Compile Include="Models\ConcessionsModel.cs" />
     <Compile Include="Models\FundsModel.cs" />
@@ -158,7 +159,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
-    <Content Include="Views\Home\StyleSheet.css" />
+    <Content Include="Views\Home\Styles.css" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -197,6 +198,7 @@
     <Content Include="Views\Home\FundsMakePaymentView.cshtml" />
     <Content Include="Views\Home\FundsUpdateEquipmentView.cshtml" />
     <Content Include="Views\Home\FundsUpdateSpaceView.cshtml" />
+    <Content Include="Views\Home\ScheduleEmployeeView.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

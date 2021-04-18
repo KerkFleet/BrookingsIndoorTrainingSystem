@@ -124,21 +124,21 @@
 
 
 @* -------------------- Update Concesssions Button ---------------------- *@
-@*<br/>
-@using (Html.BeginForm("FundsUpdateConcesssionsView", "Home", new { funds = ViewBag.Concessions }, FormMethod.Post))*@
-@*{
+<br/>
+@using (Html.BeginForm("ScheduleEmployeeView", "Home", FormMethod.Post))
+{
     @Html.AntiForgeryToken()
 
-    <div class="form-horizontal">
+   <div class="form-horizontal">
     <center>
         <div class="form-group">
             <div>
-                <input type="submit" value="Update Concessions Funds" class="button" />
+                <input type="submit" value="Schedule Employee" class="button" />
             </div>
         </div>
     </center>
-    </div>
-}*@
+   </div>
+}
 @* -------------------- Update Concesssions Button ---------------------- *@
 
 
