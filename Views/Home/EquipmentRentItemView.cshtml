@@ -1,10 +1,11 @@
-﻿@* Added by Nate O'Meara *@
+﻿@* Added by Alex Zschoche *@
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 @model BrookingsIndoorTrainingSystem.Models.EquipmentModel
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 
-@{ ViewBag.Title = "Equipment rent items"; }
-
+@{ ViewBag.Title = "Rent equipment items"; }
+@using System.Data.SqlClient;
+@using System.Web;
 
 <!DOCTYPE html>
 <html>
@@ -15,8 +16,8 @@
     <center>
         <div class="form-group">
             <div class="col-md-10">
-                <h5>@Html.Label("Equipment - Rent Item", new { style = "font-size:40px; color:##36e800" })</h5>
-                @*@/* green bar*/*@
+                <h5>@Html.Label("Rent Item", new { style = "font-size:40px; color:##36e800" })</h5>
+                @*@/* green bar - Shelby */*@
                 <html>
 
                 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -32,46 +33,171 @@
 
                         </div>
 
-
-
-                        <div class="form-horizontal">
-                            <form method="post">
-                                <fieldset>
-                                    <select id="Items" name="Items">
-                                        <option value="SoccerBall">Soccer Balls</option>
-                                        <option value="BasketBall">Basket Balls</option>
-                                    </select>
-                                    <label for="hours">Hours:</label>
-                                    <input type="number" id="hours" name="hours" min="1" max="500">
-                                    <input type="submit" />
-                                </fieldset>
-                            </form>
-                        </div>
-
-
                         @{
-                            if (IsPost)
+                            string item = Request.Form["Items"];
+                           
+
+                            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS Database; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
+                            //SqlConnection connection = new SqlConnection(connectionString);
+
+                    
+
+
+                            using (SqlConnection connection = new SqlConnection(connectionString))
                             {
-                                string item = Request.Form["Items"];
-                                int hours = Request.Form["hours"].AsInt();
-                                <div class="col-md-10">
-                                    <text align="left">
-                                        You Rented: <br />
-                                        Item: @item <br />
-                                        For @hours hours <br />
-                                    </text>
+                                //here is where we connect to the database and perform the SQL command
+                                // SqlCommand command = new SqlCommand(queryString, connection);
 
-                                </div>
+                                //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                                // command.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
+                                // command.Parameters.Add("@Location", System.Data.SqlDbType.VarChar, 50).Value = Location;
+                                // command.Parameters.Add("@Amount", System.Data.SqlDbType.Int).Value = amount;
 
 
+                                //command.Connection.Open();
+                                //command.ExecuteNonQuery();
 
+
+                                string selectQuery = "Select [Name] from Equipment";
+                                SqlCommand command2 = new SqlCommand(selectQuery, connection);
+                                //command2.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
+                                command2.Connection.Open();
+
+                                SqlDataReader reader = command2.ExecuteReader();
+
+                                if (reader.HasRows)
+                                {
+                                    <div class="form-horizontal">
+                                        <form method="post">
+                                            <fieldset>
+                                                <label for="Items">Rent Item.</label>
+                                                <select id="Items" name="Items">
+                                                    @while (reader.Read())
+                                                    {
+                                                        <option value="@reader.GetString(0)">@reader.GetString(0)</option>
+                                                    }
+                                                </select>
+
+                                                <label for="Name">Name</label>
+                                                <input type="text" id="Name" name="Name" />
+
+                                                <label for="date">Date</label>
+                                                <input type="text" id="date" name="date" />
+
+                                                <label for="hours">Hours (between 1 and 24):</label>
+                                                <input type="number" id="hours" name="hours" min="1" max="24">
+
+                                                <input type="submit" name="removeButton" />
+                                            </fieldset>
+                                        </form>
+                                    </div>
+                                    @*while (reader.Read())
+                                        {
+                                            <div>
+                                                <p>@reader.GetString(0)</p>
+
+                                            </div>
+                                            // Console.WriteLine("{0}\t{1}", reader.GetInt32(0),
+                                            // reader.GetString(1));
+                                        }*@
+                                }
+                                else
+                                {
+                                    Console.WriteLine("No rows found.");
+                                }
+                                reader.Close();
+
+                                @*<div>
+                                        <p>@command2.ExecuteReader()</p>
+
+                                    </div>*@
                             }
+
+
+
+                            @*<div class="form-horizontal">
+                                    <form method="post">
+                                        <fieldset>
+
+                                            <select id="Items" name="Items">
+                                                <option value="SoccerBall">Soccer Balls</option>
+                                                <option value="BasketBall">Basket Balls</option>
+                                            </select>
+                                            <label for="quantity">Quantity (between 1 and 5):</label>
+                                            <input type="number" id="quantity" name="quantity" min="1" max="5">
+                                            <input type="submit" name="removeButton" value="1" />
+                                        </fieldset>
+                                    </form>
+                                </div>*@
                         }
+
+
+
+
+
+
+
+                            @{
+                                if (IsPost)
+                                {
+                                    string error = "yo";
+
+                                    string Name = Request.Form["name"];
+                                    string date = Request.Form["date"];
+                                    int hours = Request.Form["hours"].AsInt();
+
+                                    string connectionString1 = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS Database; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
+                                    //SqlConnection connection = new SqlConnection(connectionString);
+
+                                    string queryString1 = "Insert into RentTable([Name], itemrented, [date], hours) Values(@name,@item, @date, @hours);";
+                                    // SqlCommand command = new SqlCommand(queryString, connection);
+
+
+                                    using (SqlConnection connection = new SqlConnection(connectionString1))
+                                    {
+                                        //here is where we connect to the database and perform the SQL command
+                                        SqlCommand command = new SqlCommand(queryString1, connection);
+
+                                        //thesee statements replace the @itemName and @itemAmount in the queryString with their appropriate variables
+                                        command.Parameters.Add("@name", System.Data.SqlDbType.VarChar, 50).Value = Name;
+                                        command.Parameters.Add("@item", System.Data.SqlDbType.VarChar, 50).Value = item;
+                                        command.Parameters.Add("@date", System.Data.SqlDbType.VarChar, 50).Value = date;
+                                        command.Parameters.Add("@hours", System.Data.SqlDbType.Int).Value = hours;
+
+
+                                        command.Connection.Open();
+                                        command.ExecuteNonQuery();
+                                    }
+
+
+
+                                    <div class="col-md-10">
+                                        <text align="left">
+                                            You rented: <br />
+                                            Item: @Name <br />
+                                            Date: @date <br />
+                                            Hours: @hours <br /> 
+                                           
+                                        </text>
+
+                                        
+
+
+
+                                    </div>
+                                   
+
+
+
+
+
+                                }
+                            }
 
                     </div>
                 </body>
             </html>
-            @*@/* end green bar*/*@
+            @*@/* end green bar - Shelby */*@
 
         </div>
     </div>
@@ -79,3 +205,4 @@
 </div>
 
 </html>
+

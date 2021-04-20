@@ -2,6 +2,61 @@
 @model BrookingsIndoorTrainingSystem.Models.ConcessionsModel
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 
+<html>
+<head>
+    <style>
+        .button {
+            /* Regular button */
+            /*background-color: #4CAF50;
+            Green border: solid;
+            border-color: black;
+            border-width: thin;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+            */
+            /* Flat button */
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: solid;
+            border-width: thin;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            /* Inne button */
+            @*border-radius: 10px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;*@
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>
+
 
 @using (Html.BeginForm("ConcessionsCartAddItem", "Home", new { itemName = ViewBag.itemName, id = ViewBag.id, itemPrice = ViewBag.itemPrice }, FormMethod.Post))
 {
@@ -11,6 +66,7 @@
         <h2 class="left">
             Add - @ViewBag.itemName - to cart
         </h2>
+        <h3 style="color:red">@ViewBag.Error </h3>
         <center>
             <div class="form-group">
                 <div class="col-md-10">
@@ -24,7 +80,7 @@
                         <div class="w3-container">
 
 
-                            <div class="w3-bar w3-border w3-green">
+                            <div class="w3-bar w3-border w3-grey">
                                 <div class="w3-bar-item"></div>
 
                             </div>
@@ -37,7 +93,7 @@
             </div>
         </div>
     </center>
-    </div>
+</div>
 
 <hr />
 
@@ -47,7 +103,7 @@
             <div class="col-md-10">
                 <font size="4" face="helvetica" color="black">
                     <div>How many units would you like to add to the Cart?:</div>
-                <html>
+                    <html>
                     <body>
 
 
@@ -64,7 +120,7 @@
 
                             <div class="form-group">
                                 <div class="col-md-8">
-                                    <input type="submit" value="Submit" class="btn btn-default" />
+                                    <input type="submit" value="Submit" class="button" />
                                 </div>
                             </div>
                         </div>
