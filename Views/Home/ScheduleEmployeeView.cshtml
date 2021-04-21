@@ -33,14 +33,13 @@
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>@item.Dates</td>
-                        <td>@Html.ActionLink(item.Monday, "ScheduleUpdateEmployee", "Home", new { employee = item.Monday }, null)</td>
-                        <td>@Html.ActionLink(item.Tuesday, "ScheduleUpdateEmployee", "Home", new { employee = item.Tuesday }, null)</td>
-                        <td>@Html.ActionLink(item.Wednesday, "ScheduleUpdateEmployee", "Home", new { employee = item.Wednesday }, null)</td>
-                        <td>@Html.ActionLink(item.Thursday, "ScheduleUpdateEmployee", "Home", new { employee = item.Thursday }, null)</td>
-                        <td>@Html.ActionLink(item.Friday, "ScheduleUpdateEmployee", "Home", new { employee = item.Friday }, null)</td>
-                        <td>@Html.ActionLink(item.Saturday, "ScheduleUpdateEmployee", "Home", new { employee = item.Saturday }, null)</td>
-                
+                        <td>@Html.ActionLink(item.Dates,  "ScheduleUpdateEmployeeView", "Home", new { Id = item.Id, Dates = item.Dates, Monday = item.Tuesday, Tuesday = item.Tuesday, Wednesday = item.Wednesday, Thursday = item.Thursday, Friday = item.Friday, Saturday = item.Saturday}, null)</td>
+                        <td>@item.Monday</td>
+                        <td>@item.Tuesday</td>
+                        <td>@item.Wednesday</td>
+                        <td>@item.Thursday</td>
+                        <td>@item.Friday</td>
+                        <td>@item.Saturday</td>
                     </tr>
                  }
 
