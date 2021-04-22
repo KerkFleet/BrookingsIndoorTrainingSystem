@@ -497,16 +497,56 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         public ActionResult ConcessionsCartAddItem(ConcessionsModel item, string itemName, int id, double itemPrice)
         {
+            string queryString1;
             string queryString;
             bool success = true;
 
             //this is the SQL statement to update our item amount. @itemAmount and @itemName are replaced using the function following
             if (item.itemAmount > 0)
             {
-                queryString = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Id = @id";
+                queryString1 = "Select Item_Amount FROM ConcessionsTable WHERE Id = @id1";
 
                 using (SqlConnection connection = new SqlConnection(connectionString))
                 {
+
+                    //here is where we connect to the database and perform the SQL command
+                    SqlCommand command = new SqlCommand(queryString1, connection);
+                    command.Parameters.Add("@id1", System.Data.SqlDbType.Int).Value = id;
+
+                    //basically a test to make sure it worked, and catch exception
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        reader.Read();
+                        int current_val = (int)reader["Item_Amount"];
+                        if (current_val < item.itemAmount)
+                        {
+                            ViewBag.Error = "Error: There is not enough of that item";
+
+                            ConcessionsCartAddItemView(itemName, id, item.itemPrice);
+                            return View("ConcessionsCartAddItemView");
+                        }
+                        connection.Close();
+
+                        if (success)
+                        {
+
+                        }
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine(e.Message);
+                    }
+
+                        
+
+                }
+
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    queryString = "UPDATE ConcessionsTable SET Item_Amount -= @itemAmount WHERE Id = @id";
+
                     //here is where we connect to the database and perform the SQL command
                     SqlCommand command = new SqlCommand(queryString, connection);
 
@@ -519,6 +559,7 @@ namespace BrookingsIndoorTrainingSystem.Controllers
                     {
                         connection.Open();
                         SqlDataReader reader = command.ExecuteReader();
+                        reader.Read();
 
                     }
                     catch (Exception e)
