@@ -7,6 +7,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace BrookingsIndoorTrainingSystem.Controllers
 {
@@ -15,13 +16,76 @@ namespace BrookingsIndoorTrainingSystem.Controllers
     {
 
         //Shelby's string
-        public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS_DB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         //+++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++++
         public ActionResult Index()
         {
             // Initalize Cart
             GlobalConcessionsCartModel.cart = new List<ConcessionsModel>();
             GlobalConcessionsCartModel.total = 0;
+
+            string sqlCreateDBQuery;
+
+            try
+            {
+                SqlConnection tmpConn = new SqlConnection(@"Server=(localdb)\MSSQLLocalDB;");
+
+                sqlCreateDBQuery = "SELECT database_id FROM sys.databases WHERE Name = 'BITS_DB'";
+
+                using (tmpConn)
+                {
+                    using (SqlCommand sqlCmd = new SqlCommand(sqlCreateDBQuery, tmpConn))
+                    {
+                        tmpConn.Open();
+
+                        object resultObj = sqlCmd.ExecuteScalar();
+
+                        int databaseID = 0;
+
+                        if (resultObj != null)
+                        {
+                            int.TryParse(resultObj.ToString(), out databaseID);
+                        }
+
+                        tmpConn.Close();
+
+                        result = (databaseID > 0);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                result = false;
+            }
+            if (!result)
+            {
+                String str;
+                SqlConnection myConn = new SqlConnection(@"Server=(localdb)\MSSQLLocalDB;");//Integrated security=SSPI;database=master
+                str = "CREATE DATABASE BITS_DB";
+               
+                SqlCommand myCommand = new SqlCommand(str, myConn);
+                try
+                {
+                    myConn.Open();
+                    myCommand.ExecuteNonQuery();
+                    myConn.Close();
+                    myConn.Open();
+                    myCommand.CommandText = System.IO.File.ReadAllText(@"C:\Users\Shelby\source\repos\BrookingsIndoorTrainingSystem\Services\Queries\Startup.sql");
+                    myCommand.ExecuteNonQuery();
+                    myConn.Close();
+
+                }
+                catch (System.Exception ex)
+                {
+                    Console.WriteLine(ex.Message);
+                }
+
+            }
+
+
+
+
+
             return View();
         }
 
