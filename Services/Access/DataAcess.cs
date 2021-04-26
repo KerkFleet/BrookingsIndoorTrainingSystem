@@ -12,7 +12,7 @@ namespace BrookingsIndoorTrainingSystem.Services.Access
 
         //this is used to connect to the database
         //Shelby's string
-         public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS Database;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+         public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS_DB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
 
         //

@@ -17,12 +17,14 @@ namespace BrookingsIndoorTrainingSystem.Controllers
 
         //Shelby's string
         public string connectionString = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=BITS_DB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        
         //+++++++++++++++++ Home pages Controllers +++++++++++++++++++++++++++++++++
         public ActionResult Index()
         {
             // Initalize Cart
             GlobalConcessionsCartModel.cart = new List<ConcessionsModel>();
             GlobalConcessionsCartModel.total = 0;
+            bool result;
 
             string sqlCreateDBQuery;
 

@@ -37,7 +37,7 @@
                             string item = Request.Form["Items"];
                            
 
-                            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS Database; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
+                            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS_DB; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
                             //SqlConnection connection = new SqlConnection(connectionString);
 
                     
@@ -146,7 +146,7 @@
                                     string date = Request.Form["date"];
                                     int hours = Request.Form["hours"].AsInt();
 
-                                    string connectionString1 = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS Database; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
+                                    string connectionString1 = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS_DB; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
                                     //SqlConnection connection = new SqlConnection(connectionString);
 
                                     string queryString1 = "Insert into RentTable([Name], itemrented, [date], hours) Values(@name,@item, @date, @hours);";

@@ -38,7 +38,7 @@
                             int amount = Request.Form["quantity"].AsInt();
                             string Location = Request.Form["Location"];
 
-                            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS Database; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
+                            string connectionString = @"Data Source=(localdb)\MSSQLLocalDB; Initial Catalog = BITS_DB; Integrated Security = True; MultipleActiveResultSets = True; Application Name = EntityFramework";
                             //SqlConnection connection = new SqlConnection(connectionString);
 
                             string queryString = "DELETE from Equipment where name = @item;";
