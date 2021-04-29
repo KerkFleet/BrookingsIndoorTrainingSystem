@@ -1,36 +1,91 @@
 ﻿@* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
 @model BrookingsIndoorTrainingSystem.Models.ConcessionsModel
 @* ++++++ INCLUDE MODEL TO CONTECT TO CONTROLLER --John ++++++*@
+<html>
+<head>
+    <style>
+        .button {
+            /* Regular button */
+            /*background-color: #4CAF50;
+            Green border: solid;
+            border-color: black;
+            border-width: thin;
+            color: white;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+            */
+            /* Flat button */
+            border-radius: 10px;
+            background: #ffffff;
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: solid;
+            border-width: thin;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;
+
+            /* Inne button */
+            @*border-radius: 10px;
+            background: linear-gradient(145deg, #e6e6e6, #ffffff);
+            box-shadow: 20px 20px 30px #d1d1d1, -20px -20px 30px #ffffff;
+            border: none;
+            color: black;
+            padding: 15px 32px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 13px;
+            margin: 4px 2px;
+            cursor: pointer;*@
+        }
+    </style>
+</head>
+<body>
+
+
+</body>
+</html>
 
 @using (Html.BeginForm("ConcessionsAddItemAmount", "Home", FormMethod.Post))
 {
     @Html.AntiForgeryToken()
+    <h5 style="font-size:40px; color:#36e800">@Html.Label("Edit - ", new { style = "font-size:40px; color:#36e800" }) @ViewBag.itemName</h5>
 
     <div class="form-horizontal">
         <center>
             <div class="form-group">
-                <h3 class="left">Edit - @ViewBag.itemName</h3>
+                <h2 class="left">Edit - @ViewBag.itemName</h2>
                 <div class="col-md-10">
                     @*@/* green bar */*@
                     <html>
 
-                    <meta name="viewport" content="width=device-width, initial-scale=1">
-                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-                    <body>
-                        <div class="w3-container">
+                <meta name="viewport" content="width=device-width, initial-scale=1">
+                <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                <body>
+                    <div class="w3-container">
 
 
-                            <div class="w3-bar w3-border w3-green">
+                            <div class="w3-bar w3-border w3-gray">
                                 <div class="w3-bar-item"></div>
 
-                            </div>
-
                         </div>
-                    </body>
-                </html>
-                @*@/* end green bar - Shelby */*@
-            </div>
-            </div>
+
+                    </div>
+                </body>
+            </html>
+            @*@/* end green bar - Shelby */*@
+
+        </div>
     </center>
 </div>
 }
@@ -50,7 +105,7 @@
     </div>
 }
 
-@using (Html.BeginForm("ConcessionsAddItemView", "Home", new { itemName = ViewBag.itemName }, FormMethod.Post))
+@using (Html.BeginForm("ConcessionsAddItemView", "Home", new { itemName = ViewBag.itemName, id = ViewBag.id }, FormMethod.Post))
 {
     @Html.AntiForgeryToken()
 
@@ -58,7 +113,7 @@
         <center>
             <div class="form-group">
                 <div>
-                    <input type="submit" value="Add @ViewBag.itemName" class="button"/>
+                    <input type="submit" value="Add @ViewBag.itemName" class="button" />
                 </div>
             </div>
         </center>
@@ -66,15 +121,15 @@
 }
 
 
-@using (Html.BeginForm("ConcessionsRemoveItemView", "Home", new { itemName = ViewBag.itemName }, FormMethod.Post))
+@using (Html.BeginForm("ConcessionsRemoveItemView", "Home", new { itemName = ViewBag.itemName, id = ViewBag.id }, FormMethod.Post))
 {
- @Html.AntiForgeryToken()
-     <div class="form-horizontal">
+    @Html.AntiForgeryToken()
+    <div class="form-horizontal">
         <center>
             <div class="form-group">
                 <div>
-                    <input type="submit" value="Remove @ViewBag.itemName" class="button"/>
-                    
+                    <input type="submit" value="Remove @ViewBag.itemName" class="button" />
+
                 </div>
             </div>
         </center>
@@ -85,28 +140,3 @@
 
 @*@/* green button - Shelby */*@
 
-
-<html>
-<head>
-    <style>
-        .button {
-            background-color: #4CAF50; /* Green */
-            border: solid;
-            border-color: black;
-            border-width: thin;
-            color: white;
-            padding: 15px 32px;
-            text-align: center;
-            text-decoration: none;
-            display: inline-block;
-            font-size: 13px;
-            margin: 4px 2px;
-            cursor: pointer;
-        }
-    </style>
-</head>
-<body>
-
-
-</body>
-</html>

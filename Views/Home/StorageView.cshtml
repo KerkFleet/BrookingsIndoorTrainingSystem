@@ -4,25 +4,35 @@
 
 @using (Html.BeginForm("ConcessionsEditItemView", "Home", FormMethod.Post))
 {
-    <h1>Concessions Storage</h1>
-    @*@/* green bar - Shelby */*@
-    <html>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-    <body>
-        <div class="w3-container">
+    <h5>@Html.Label("Concessions Storage", new { style = "font-size:40px; color:#36e800" })</h5>
+    <div class="form-horizontal">
+        <center>
+            <div class="form-group">
+                <div>
+
+                    @*@/* green bar - Shelby */*@
+                    <html>
+
+                    <meta name="viewport" content="width=device-width, initial-scale=1">
+                    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+                    <body>
+                        <div class="w3-container">
 
 
-            <div class="w3-bar w3-border w3-green">
-                <div class="w3-bar-item"></div>
+                            <div class="w3-bar w3-border w3-gray">
+                                <div class="w3-bar-item"></div>
 
+                            </div>
+
+                        </div>
+                    </body>
+                </html>
+                @*@/* end green bar - Shelby */*@
             </div>
-
         </div>
-    </body>
-</html>
-@*@/* end green bar - Shelby */*@
+    </center>
+</div>
 <table>
     <tr>
         <th>Item &nbsp;</th>
@@ -31,16 +41,17 @@
     </tr>
     @foreach (var item in Model)
     {
-<tr>
+        <tr>
 
-    <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName, id = item.id }, null) &nbsp;</td>
-    <td>@item.itemAmount &nbsp;</td>
-    <td>@item.itemLoc &nbsp;</td>
+            <td>@Html.ActionLink(item.itemName, "ConcessionsEditItemView", "Home", new { itemName = item.itemName, id = item.id }, null) &nbsp;</td>
+            <td>@item.itemAmount &nbsp;</td>
+            <td>@item.itemLoc &nbsp;</td>
 
 
-</tr>
+        </tr>
     }
 </table>
 
 
 }
+
